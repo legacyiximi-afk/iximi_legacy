@@ -25,6 +25,9 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV PORT=3000
 
+# Instalar curl para healthcheck
+RUN apk add --no-cache curl
+
 RUN addgroup -g 1001 -S nodejs
 RUN adduser -S iximi -u 1001
 
