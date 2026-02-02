@@ -404,6 +404,7 @@
     <div class="navigation">
         <button class="nav-btn" onclick="prevSlide()">← Anterior</button>
         <button class="nav-btn" onclick="nextSlide()">Siguiente →</button>
+        <button class="nav-btn" id="autoplayBtn" onclick="toggleAutoPlay()" style="background: rgba(255,255,255,0.2);">▶ Auto-play: OFF</button>
     </div>
 
     <script>
@@ -458,6 +459,25 @@
             if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
             if (e.key === 'ArrowLeft') prevSlide();
         });
+
+        // Auto-play mode for video demo
+        let autoPlayInterval = null;
+        
+        function toggleAutoPlay() {
+            const btn = document.getElementById('autoplayBtn');
+            if (autoPlayInterval) {
+                clearInterval(autoPlayInterval);
+                autoPlayInterval = null;
+                btn.textContent = '▶ Auto-play: OFF';
+                btn.style.background = 'rgba(255,255,255,0.2)';
+            } else {
+                autoPlayInterval = setInterval(() => {
+                    nextSlide();
+                }, 5000); // 5 segundos por slide
+                btn.textContent = '⏹ Auto-play: ON';
+                btn.style.background = '#ff6f00';
+            }
+        }
 
         // Initialize
         showSlide(1);
