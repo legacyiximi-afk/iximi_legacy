@@ -3,13 +3,13 @@
 # Desarrollado por: Estefanía Pérez Vázquez
 
 # Stage 1: Dependencias
-FROM node:18-alpine AS deps
+FROM node:25-alpine AS deps
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci --only=production
 
 # Stage 2: Builder (compila TypeScript)
-FROM node:18-alpine AS builder
+FROM node:25-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY package*.json ./
@@ -19,7 +19,7 @@ RUN npm run build 2>/dev/null || true
 RUN if [ ! -d "dist" ]; then cp -r src dist; fi
 
 # Stage 3: Runner
-FROM node:18-alpine AS runner
+FROM node:25-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
