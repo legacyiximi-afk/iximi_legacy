@@ -1,0 +1,16 @@
+# Tipo de commit (selecciona uno):
+# feat     - Nueva funcionalidad
+# fix      - Corrección de bug
+# docs     - Cambios en documentación
+# style    - Cambios de formato (no afectan código)
+# refactor - Refactorización de código
+# test     - Añadir o modificar tests
+# chore    - Tareas de mantenimiento
+
+# Ejemplos:
+# feat: Añadir nueva página de login
+# fix: Corregir error en validación de formulario
+# docs: Actualizar README con nuevas instrucciones
+
+# Los mensajes deben ser en español o inglés consistentemente
+# Mantén los mensajes concisos (max 50 caracteres para el título)
