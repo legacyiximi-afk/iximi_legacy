@@ -22,29 +22,29 @@ app.use(express.static('public'));
 // DATOS DEL PROYECTO Y FUNDADORA
 // ============================================================================
 const projectInfo = {
-  name: "IXIMI Legacy",
-  version: "1.0.0",
+  name: 'IXIMI Legacy',
+  version: '1.0.0',
   founder: {
-    name: "Estefanía Pérez Vázquez",
-    email: "legacyiximi@gmail.com",
-    github: "@legacyiximi-afk",
-    education: "Autodidacta (secundaria terminada)",
-    developmentPeriod: "Mayo 2025 - Enero 2026",
-    achievement: "Sistema desarrollado desde teléfono con Termux sin apoyo institucional"
+    name: 'Estefanía Pérez Vázquez',
+    email: 'legacyiximi@gmail.com',
+    github: '@legacyiximi-afk',
+    education: 'Autodidacta (secundaria terminada)',
+    developmentPeriod: 'Mayo 2025 - Enero 2026',
+    achievement: 'Sistema desarrollado desde teléfono con Termux sin apoyo institucional'
   },
   impact: {
     artisans: 500000,
     annualRoyalties: 500000000,
     socialROI: 89,
     designsProtected: 50000,
-    innovation: "Primer sistema blockchain-cultural del mundo"
+    innovation: 'Primer sistema blockchain-cultural del mundo'
   },
   technology: {
-    blockchain: "Polygon (Matic)",
-    backend: "Node.js/Express",
-    database: "PostgreSQL + Redis",
-    architecture: "Microservicios con Docker",
-    security: "ISO 27001, GDPR compliant"
+    blockchain: 'Polygon (Matic)',
+    backend: 'Node.js/Express',
+    database: 'PostgreSQL + Redis',
+    architecture: 'Microservicios con Docker',
+    security: 'ISO 27001, GDPR compliant'
   }
 };
 
@@ -76,41 +76,41 @@ app.get('/api/demo', (req, res) => {
   const demoData = {
     textiles: [
       {
-        id: "iximi-001",
-        name: "Huipil Zapoteco Tradicional",
-        artisan: "María Hernández",
-        community: "Zapoteca, Oaxaca",
-        technique: "Telar de cintura",
-        materials: ["Algodón", "Tintes naturales"],
-        qrCode: "IXIMI-ZAP-001-2024",
-        blockchainHash: "0x7a3b9c8d2e1f4a5b6c7d8e9f0a1b2c3d4e5f6a7b",
-        certificationDate: "2024-01-15",
+        id: 'iximi-001',
+        name: 'Huipil Zapoteco Tradicional',
+        artisan: 'María Hernández',
+        community: 'Zapoteca, Oaxaca',
+        technique: 'Telar de cintura',
+        materials: ['Algodón', 'Tintes naturales'],
+        qrCode: 'IXIMI-ZAP-001-2024',
+        blockchainHash: '0x7a3b9c8d2e1f4a5b6c7d8e9f0a1b2c3d4e5f6a7b',
+        certificationDate: '2024-01-15',
         royalties: 1250.50
       },
       {
-        id: "iximi-002",
-        name: "Rebozo Purépecha",
-        artisan: "Juana Martínez",
-        community: "Purépecha, Michoacán",
-        technique: "Telar de pedal",
-        materials: ["Lana", "Tintes vegetales"],
-        qrCode: "IXIMI-PUR-002-2024",
-        blockchainHash: "0x8b4c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6",
-        certificationDate: "2024-01-20",
+        id: 'iximi-002',
+        name: 'Rebozo Purépecha',
+        artisan: 'Juana Martínez',
+        community: 'Purépecha, Michoacán',
+        technique: 'Telar de pedal',
+        materials: ['Lana', 'Tintes vegetales'],
+        qrCode: 'IXIMI-PUR-002-2024',
+        blockchainHash: '0x8b4c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6',
+        certificationDate: '2024-01-20',
         royalties: 890.25
       }
     ],
     communities: [
       {
-        id: "zapotec-oaxaca",
-        name: "Comunidad Zapoteca, Oaxaca",
+        id: 'zapotec-oaxaca',
+        name: 'Comunidad Zapoteca, Oaxaca',
         artisans: 1500,
         textilesRegistered: 350,
         totalRoyalties: 125000.75
       },
       {
-        id: "purepecha-michoacan",
-        name: "Comunidad Purépecha, Michoacán",
+        id: 'purepecha-michoacan',
+        name: 'Comunidad Purépecha, Michoacán',
         artisans: 1200,
         textilesRegistered: 280,
         totalRoyalties: 98750.30
@@ -121,13 +121,13 @@ app.get('/api/demo', (req, res) => {
       totalCommunities: 2,
       totalRoyalties: 213750.05,
       verificationsToday: 47,
-      systemUptime: "99.9%"
+      systemUptime: '99.9%'
     }
   };
   
   res.json({
     success: true,
-    message: "Datos de demostración IXIMI Legacy",
+    message: 'Datos de demostración IXIMI Legacy',
     data: demoData
   });
 });
@@ -146,21 +146,21 @@ app.get('/api/verify/:qrCode', (req, res) => {
       isValid: isVerified,
       verificationDate,
       blockchainConfirmation: isVerified ? {
-        transactionHash: "0x" + Math.random().toString(16).substr(2, 64),
+        transactionHash: '0x' + Math.random().toString(16).substr(2, 64),
         blockNumber: Math.floor(Math.random() * 1000000),
         timestamp: verificationDate
       } : null,
       textile: isVerified ? {
-        name: "Huipil Zapoteco Tradicional",
-        artisan: "María Hernández",
-        community: "Zapoteca, Oaxaca",
-        certifiedDate: "2024-01-15",
+        name: 'Huipil Zapoteco Tradicional',
+        artisan: 'María Hernández',
+        community: 'Zapoteca, Oaxaca',
+        certifiedDate: '2024-01-15',
         authenticityScore: 98
       } : null
     },
     message: isVerified 
-      ? "Textil verificado y autentico" 
-      : "Codigo QR no valido"
+      ? 'Textil verificado y autentico' 
+      : 'Codigo QR no valido'
   });
 });
 
@@ -171,30 +171,30 @@ app.post('/api/register', (req, res) => {
   if (!textileData.name || !textileData.artisan) {
     return res.status(400).json({
       success: false,
-      error: "Datos incompletos"
+      error: 'Datos incompletos'
     });
   }
   
   const blockchainResponse = {
     success: true,
     transaction: {
-      hash: "0x" + Math.random().toString(16).substr(2, 64),
+      hash: '0x' + Math.random().toString(16).substr(2, 64),
       blockNumber: Math.floor(Math.random() * 1000000),
       timestamp: new Date().toISOString(),
-      network: "Polygon Mumbai"
+      network: 'Polygon Mumbai'
     },
     textile: {
       ...textileData,
-      id: "iximi-" + Date.now(),
-      qrCode: "IXIMI-" + Math.random().toString(36).substr(2, 9).toUpperCase(),
+      id: 'iximi-' + Date.now(),
+      qrCode: 'IXIMI-' + Math.random().toString(36).substr(2, 9).toUpperCase(),
       certificationDate: new Date().toISOString(),
-      status: "certified"
+      status: 'certified'
     }
   };
   
   res.status(201).json({
     success: true,
-    message: "Textil registrado exitosamente en blockchain",
+    message: 'Textil registrado exitosamente en blockchain',
     data: blockchainResponse
   });
 });
@@ -226,17 +226,17 @@ app.get('/presentation', (req, res) => {
 app.use((req, res) => {
   res.status(404).json({
     success: false,
-    error: "Endpoint no encontrado",
+    error: 'Endpoint no encontrado',
     availableEndpoints: [
-      "GET /api/health",
-      "GET /api/project",
-      "GET /api/demo",
-      "GET /api/verify/:qrCode",
-      "POST /api/register",
-      "GET /",
-      "GET /dashboard",
-      "GET /demo-meeting",
-      "GET /presentation"
+      'GET /api/health',
+      'GET /api/project',
+      'GET /api/demo',
+      'GET /api/verify/:qrCode',
+      'POST /api/register',
+      'GET /',
+      'GET /dashboard',
+      'GET /demo-meeting',
+      'GET /presentation'
     ]
   });
 });
@@ -245,7 +245,7 @@ app.use((err, req, res, next) => {
   console.error('Error:', err);
   res.status(500).json({
     success: false,
-    error: "Error interno del servidor",
+    error: 'Error interno del servidor',
     message: process.env.NODE_ENV === 'development' ? err.message : undefined
   });
 });
