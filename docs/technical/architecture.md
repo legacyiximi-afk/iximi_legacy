@@ -219,3 +219,4 @@ kubectl apply -f k8s/
 - **Horario**: 24/7 para incidentes críticos
 - **Contacto**: soporte@iximilegacy.org
 - **SLA**: Resolución de incidentes críticos en < 4 horas
+jj
