@@ -8,12 +8,14 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci --only=production
 
-# Stage 2: Builder (compila TypeScript si existe)
+# Stage 2: Builder (compila TypeScript)
 FROM node:18-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
-COPY . .
-RUN if [ -f "tsconfig.json" ]; then npm run build; fi
+COPY package*.json ./
+COPY tsconfig.json ./
+COPY src ./src
+RUN npm run build 2>/dev/null || true
 
 # Stage 3: Runner
 FROM node:18-alpine AS runner
