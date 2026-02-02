@@ -1,0 +1,79 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: iximi-legacy-app
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://iximi:password@db:5432/iximi_legacy
+      - REDIS_URL=redis://redis:6379
+      - BLOCKCHAIN_NETWORK=polygon-mumbai
+      - JWT_SECRET=iximi_legacy_jwt_secret_production_2024
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - ./logs:/app/logs
+      - ./uploads:/app/uploads
+    networks:
+      - iximi-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  db:
+    image: postgres:15-alpine
+    container_name: iximi-db
+    environment:
+      - POSTGRES_DB=iximi_legacy
+      - POSTGRES_USER=iximi
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - iximi-network
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: iximi-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - iximi-network
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: iximi-frontend
+    ports:
+      - "3001:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://app:3000
+    depends_on:
+      - app
+    networks:
+      - iximi-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  iximi-network:
+    driver: bridge

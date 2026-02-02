@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IXIMI Legacy - Demo Reunión Exdiputado</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        header {
+            background: rgba(0,0,0,0.3);
+            padding: 30px;
+            text-align: center;
+        }
+        h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        .subtitle { font-size: 1.2rem; opacity: 0.9; }
+        .founder-info {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 30px auto;
+            max-width: 600px;
+            text-align: center;
+        }
+        .demo-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            padding: 30px;
+        }
+        .card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+        }
+        .card h2 { margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .qr-display {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .qr-placeholder {
+            width: 200px;
+            height: 200px;
+            background: #1a237e;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-size: 3rem;
+        }
+        .qr-code-text {
+            color: #1a237e;
+            font-size: 1.2rem;
+            font-weight: bold;
+            font-family: monospace;
+        }
+        .btn {
+            background: linear-gradient(45deg, #ff6f00, #ffa000);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 5px;
+            transition: all 0.3s;
+        }
+        .btn:hover { transform: scale(1.05); }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .stat-item {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .stat-value { font-size: 2rem; font-weight: bold; color: #ffd54f; }
+        .stat-label { font-size: 0.9rem; opacity: 0.8; }
+        .verification-result {
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .verification-success {
+            background: rgba(76, 175, 80, 0.3);
+            border: 2px solid #4caf50;
+        }
+        .verification-error {
+            background: rgba(244, 67, 54, 0.3);
+            border: 2px solid #f44336;
+        }
+        .textile-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .textile-item {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+        .textile-name { font-weight: bold; font-size: 1.1rem; }
+        .textile-artisan { opacity: 0.8; margin: 5px 0; }
+        .textile-community { font-size: 0.9rem; color: #ffd54f; }
+        .live-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: #4caf50;
+            border-radius: 50%;
+            margin-right: 10px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(0,0,0,0.3);
+            margin-top: 30px;
+        }
+        .api-response {
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 10px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>IXIMI Legacy - Demo Reunión Exdiputado</h1>
+        <p class="subtitle">Sistema Blockchain para Protección de Textiles Indígenas</p>
+        <div class="founder-info">
+            <p><strong>Fundadora:</strong> Estefanía Pérez Vázquez</p>
+            <p><strong>Email:</strong> legacyiximi@gmail.com | <strong>GitHub:</strong> @legacyiximi-afk</p>
+            <p><strong>Logro:</strong> Sistema desarrollado desde teléfono con Termux sin apoyo institucional</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <p><span class="live-indicator"></span>Sistema funcionando en vivo</p>
+
+        <div class="demo-section">
+            <!-- QR Verification Demo -->
+            <div class="card">
+                <h2>📱 Verificación de QR</h2>
+                <div class="qr-display">
+                    <div class="qr-placeholder">📱</div>
+                    <p class="qr-code-text">IXIMI-ZAP-001-2024</p>
+                    <p style="color: #666; margin-top: 10px;">Escanea para verificar autenticidad</p>
+                </div>
+                <button class="btn" onclick="verifyQR('IXIMI-ZAP-001-2024')">Verificar QR Valido</button>
+                <button class="btn btn-outline" onclick="verifyQR('INVALID-QR-123')">Verificar QR Invalido</button>
+                <div id="verification-result"></div>
+            </div>
+
+            <!-- Live Stats -->
+            <div class="card">
+                <h2>📊 Estadisticas en Vivo</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value" id="stat-textiles">5</div>
+                        <div class="stat-label">Textiles Registrados</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="stat-communities">2</div>
+                        <div class="stat-label">Comunidades</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="stat-royalties">$2,140</div>
+                        <div class="stat-label">Regalias Distribuidas</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">99.9%</div>
+                        <div class="stat-label">Uptime Sistema</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="stat-verifications">47</div>
+                        <div class="stat-label">Verificaciones Hoy</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">2.3s</div>
+                        <div class="stat-label">Tiempo Respuesta</div>
+                    </div>
+                </div>
+                <button class="btn" onclick="loadDemoData()">Recargar Datos</button>
+            </div>
+
+            <!-- Blockchain Demo -->
+            <div class="card">
+                <h2>🔗 Registro en Blockchain</h2>
+                <p style="margin-bottom: 20px;">Simulacion de registro de nuevo textil en blockchain Polygon</p>
+                <div style="margin-bottom: 20px;">
+                    <input type="text" id="textile-name" placeholder="Nombre del textil" 
+                           style="width: 100%; padding: 12px; border-radius: 8px; border: none; margin-bottom: 10px;" 
+                           value="Huipil Mititeco">
+                    <input type="text" id="textile-artisan" placeholder="Nombre del artesano"
+                           style="width: 100%; padding: 12px; border-radius: 8px; border: none;"
+                           value="Ana Lopez Garcia">
+                </div>
+                <button class="btn" onclick="registerTextile()">Registrar en Blockchain</button>
+                <div id="blockchain-result"></div>
+            </div>
+
+            <!-- API Response -->
+            <div class="card">
+                <h2>🌐 Respuesta API</h2>
+                <button class="btn" onclick="getHealthCheck()">Health Check</button>
+                <button class="btn btn-outline" onclick="getProjectInfo()">Info Proyecto</button>
+                <button class="btn" onclick="getDemoData()">Datos Demo</button>
+                <div class="api-response" id="api-response">
+Haz clic en un boton para ver la respuesta de la API...
+                </div>
+            </div>
+        </div>
+
+        <!-- Textile Registry -->
+        <div class="card" style="margin: 30px;">
+            <h2>📜 Registro de Textiles Certificados</h2>
+            <div class="textile-list" id="textile-list">
+                <div class="textile-item">
+                    <div class="textile-name">Huipil Zapoteco Tradicional</div>
+                    <div class="textile-artisan">María Hernández</div>
+                    <div class="textile-community">Zapoteca, Oaxaca</div>
+                    <div style="margin-top: 10px;">
+                        <span style="background: #4caf50; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem;">Certificado</span>
+                        <span style="opacity: 0.7; margin-left: 10px;">QR: IXIMI-ZAP-001-2024</span>
+                    </div>
+                </div>
+                <div class="textile-item">
+                    <div class="textile-name">Rebozo Purépecha</div>
+                    <div class="textile-artisan">Juana Martínez</div>
+                    <div class="textile-community">Purépecha, Michoacán</div>
+                    <div style="margin-top: 10px;">
+                        <span style="background: #4caf50; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem;">Certificado</span>
+                        <span style="opacity: 0.7; margin-left: 10px;">QR: IXIMI-PUR-002-2024</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Impact Metrics -->
+        <div class="card" style="margin: 30px; background: linear-gradient(135deg, rgba(255,111,0,0.3), rgba(255,160,0,0.3));">
+            <h2>🎯 Impacto Esperado (5 Años)</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 20px;">
+                <div style="text-align: center;">
+                    <div style="font-size: 3rem; font-weight: bold;">500,000</div>
+                    <div>Artesanos Beneficiados</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 3rem; font-weight: bold;">$500 MDP</div>
+                    <div>Regalías Anuales</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 3rem; font-weight: bold;">50,000</div>
+                    <div>Diseños Protegidos</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 3rem; font-weight: bold;">89:1</div>
+                    <div>ROI Social</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>IXIMI Legacy - Demo para Reunión con Exdiputado</p>
+        <p>Desarrollado por Estefanía Pérez Vázquez | legacyiximi@gmail.com</p>
+    </footer>
+
+    <script>
+        const API_BASE = '';
+
+        async function verifyQR(qrCode) {
+            try {
+                const response = await fetch(API_BASE + '/api/verify/' + qrCode);
+                const data = await response.json();
+                
+                const resultDiv = document.getElementById('verification-result');
+                const isValid = data.verification.isValid;
+                
+                resultDiv.innerHTML = `
+                    <div class="verification-result ${isValid ? 'verification-success' : 'verification-error'}">
+                        <h3>${isValid ? '✅ VERIFICADO' : '❌ NO VERIFICADO'}</h3>
+                        <p>${data.message}</p>
+                        ${isValid ? `
+                            <div style="margin-top: 15px; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                                <p><strong>Textil:</strong> ${data.verification.textile.name}</p>
+                                <p><strong>Artesano:</strong> ${data.verification.textile.artisan}</p>
+                                <p><strong>Comunidad:</strong> ${data.verification.textile.community}</p>
+                                <p><strong>Score:</strong> ${data.verification.textile.authenticityScore}%</p>
+                                <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.7;">
+                                    Hash Blockchain: ${data.verification.blockchainConfirmation.transactionHash.substring(0, 20)}...
+                                </p>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        async function registerTextile() {
+            const name = document.getElementById('textile-name').value;
+            const artisan = document.getElementById('textile-artisan').value;
+            
+            try {
+                const response = await fetch(API_BASE + '/api/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, artisan })
+                });
+                const data = await response.json();
+                
+                const resultDiv = document.getElementById('blockchain-result');
+                resultDiv.innerHTML = `
+                    <div style="padding: 20px; background: rgba(76, 175, 80, 0.3); border-radius: 10px; margin-top: 20px;">
+                        <h3>✅ Registro Exitoso</h3>
+                        <p><strong>Mensaje:</strong> ${data.message}</p>
+                        <div style="margin-top: 15px; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                            <p><strong>ID Textil:</strong> ${data.data.textile.id}</p>
+                            <p><strong>QR Code:</strong> ${data.data.textile.qrCode}</p>
+                            <p><strong>Hash Blockchain:</strong> ${data.data.transaction.hash.substring(0, 30)}...</p>
+                            <p><strong>Red:</strong> ${data.data.transaction.network}</p>
+                            <p><strong>Timestamp:</strong> ${data.data.transaction.timestamp}</p>
+                        </div>
+                    </div>
+                `;
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        async function loadDemoData() {
+            await getDemoData();
+        }
+
+        async function getHealthCheck() {
+            try {
+                const response = await fetch(API_BASE + '/api/health');
+                const data = await response.json();
+                document.getElementById('api-response').textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        async function getProjectInfo() {
+            try {
+                const response = await fetch(API_BASE + '/api/project');
+                const data = await response.json();
+                document.getElementById('api-response').textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        async function getDemoData() {
+            try {
+                const response = await fetch(API_BASE + '/api/demo');
+                const data = await response.json();
+                document.getElementById('api-response').textContent = JSON.stringify(data, null, 2);
+                
+                // Update stats
+                document.getElementById('stat-textiles').textContent = data.data.statistics.totalTextiles;
+                document.getElementById('stat-communities').textContent = data.data.statistics.totalCommunities;
+                document.getElementById('stat-royalties').textContent = '$' + data.data.statistics.totalRoyalties.toLocaleString('es-MX');
+                document.getElementById('stat-verifications').textContent = data.data.statistics.verificationsToday;
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        // Load demo data on page load
+        window.onload = function() {
+            getDemoData();
+        };
+    </script>
+</body>
+</html>

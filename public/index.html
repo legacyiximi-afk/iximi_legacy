@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IXIMI Legacy - Sistema Blockchain para Textiles Indígenas</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a237e 0%, #283593 50%, #3949ab 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(0,0,0,0.2);
+        }
+        h1 { font-size: 3.5rem; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .subtitle { font-size: 1.5rem; opacity: 0.9; margin-bottom: 30px; }
+        .founder-badge {
+            background: rgba(255,255,255,0.15);
+            padding: 15px 30px;
+            border-radius: 50px;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+        }
+        .hero {
+            padding: 80px 20px;
+            text-align: center;
+        }
+        .hero h2 { font-size: 2.5rem; margin-bottom: 20px; }
+        .hero p { font-size: 1.2rem; max-width: 800px; margin: 0 auto 40px; opacity: 0.9; }
+        .btn {
+            background: linear-gradient(45deg, #ff6f00, #ffa000);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid white;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            padding: 60px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .stat-card {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        .stat-number { font-size: 3rem; font-weight: bold; color: #ffd54f; }
+        .stat-label { font-size: 1rem; opacity: 0.9; margin-top: 10px; }
+        .features { padding: 80px 20px; background: rgba(0,0,0,0.1); }
+        .features h2 { text-align: center; font-size: 2.5rem; margin-bottom: 50px; }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .feature-card {
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+        .feature-icon { font-size: 3rem; margin-bottom: 20px; }
+        .feature-card h3 { font-size: 1.5rem; margin-bottom: 15px; }
+        .feature-card p { opacity: 0.9; line-height: 1.6; }
+        footer {
+            text-align: center;
+            padding: 40px;
+            background: rgba(0,0,0,0.3);
+        }
+        .contact-info { margin-bottom: 20px; }
+        .contact-info a { color: #ffd54f; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>IXIMI Legacy</h1>
+        <p class="subtitle">Sistema Blockchain para la Justicia Cultural en México</p>
+        <div class="founder-badge">
+            Desarrollado por Estefanía Pérez Vázquez
+        </div>
+    </header>
+
+    <section class="hero">
+        <h2>Protegiendo el Patrimonio Textile de México</h2>
+        <p>
+            IXIMI Legacy es un sistema blockchain innovador que protege los diseños textiles 
+            indígenas mediante registro inmutable, certificación digital y distribución 
+            automática de regalías.
+        </p>
+        <a href="/demo-meeting" class="btn">Ver Demostración</a>
+        <a href="/dashboard" class="btn btn-secondary">Dashboard</a>
+    </section>
+
+    <section class="stats">
+        <div class="stat-card">
+            <div class="stat-number">500K</div>
+            <div class="stat-label">Artesanos Beneficiados</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">$500M</div>
+            <div class="stat-label">Regalías Anuales</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">89:1</div>
+            <div class="stat-label">ROI Social</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">50K</div>
+            <div class="stat-label">Diseños Protegidos</div>
+        </div>
+    </section>
+
+    <section class="features">
+        <h2>Características Principales</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🔗</div>
+                <h3>Registro Blockchain</h3>
+                <p>Diseños registrados de forma inmutable en blockchain Polygon, 
+                garantizando autenticidad y trazabilidad.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3>Certificación QR</h3>
+                <p>Códigos QR verificables instantly que cualquier consumidor 
+                puede escanear para autenticar productos.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>Regalías Automáticas</h3>
+                <p>Smart contracts que distribuyen automáticamente el 5-15% 
+                de regalías a los artesanos.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <h3>Accesibilidad Total</h3>
+                <p>Plataforma diseñada para comunidades indígenas con 
+                interfaz intuitiva y soporte multilingüe.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="contact-info">
+            <p>📧 Contacto: <a href="mailto:legacyiximi@gmail.com">legacyiximi@gmail.com</a></p>
+            <p>🐙 GitHub: <a href="https://github.com/legacyiximi-afk">@legacyiximi-afk</a></p>
+        </div>
+        <p>© 2026 IXIMI Legacy - Desarrollado con determinación por una mexicana</p>
+    </footer>
+</body>
+</html>
