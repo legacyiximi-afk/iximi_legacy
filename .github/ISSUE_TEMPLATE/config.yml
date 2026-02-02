@@ -1,0 +1,13 @@
+# Configuración de Issues para IXIMI Legacy
+
+blank_issues_enabled: true
+contact_links:
+  - name: 📧 Contacto General
+    url: mailto:legacyiximi@gmail.com
+    about: Para consultas generales sobre el proyecto
+  - name: 💬 Discord de la Comunidad
+    url: https://discord.gg/iximi-legacy
+    about: Únete a nuestra comunidad para discutir el proyecto
+  - name: 📚 Documentación
+    url: https://github.com/legacyiximi-afk/iximi_legacy/tree/main/docs
+    about: Revisa nuestra documentación antes de abrir un issue
