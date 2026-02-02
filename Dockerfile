@@ -16,6 +16,7 @@ COPY package*.json ./
 COPY tsconfig.json ./
 COPY src ./src
 RUN npm run build 2>/dev/null || true
+RUN if [ ! -d "dist" ]; then cp -r src dist; fi
 
 # Stage 3: Runner
 FROM node:18-alpine AS runner
@@ -30,9 +31,8 @@ RUN adduser -S iximi -u 1001
 # Copiar archivos necesarios
 COPY --from=deps /app/node_modules ./node_modules
 COPY package.json ./
-# Si existe dist, usar eso, sino usar src
+# Copiar dist que ya fue creado en el builder
 COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/src ./src
 COPY public ./public
 COPY docker-entrypoint.sh /
 
