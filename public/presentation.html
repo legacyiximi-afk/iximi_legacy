@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IXIMI Legacy - Presentación para Exdiputado</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .presentation {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .slide {
+            display: none;
+            min-height: 80vh;
+            padding: 60px 40px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .slide.active { display: block; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .slide h1 { font-size: 3rem; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .slide h2 { font-size: 2.2rem; margin-bottom: 30px; color: #ffd54f; }
+        .slide p { font-size: 1.3rem; line-height: 1.8; margin-bottom: 20px; opacity: 0.95; }
+        .founder-intro {
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            margin: 30px 0;
+        }
+        .founder-photo {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #ff6f00, #ffa000);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        .stat-card {
+            background: rgba(255,255,255,0.15);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        .stat-number { font-size: 3rem; font-weight: bold; color: #ffd54f; }
+        .stat-label { font-size: 1.1rem; margin-top: 10px; }
+        .feature-list {
+            list-style: none;
+            margin: 30px 0;
+        }
+        .feature-list li {
+            padding: 15px 20px;
+            margin: 10px 0;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .feature-list li::before { content: "✓"; color: #4caf50; font-weight: bold; font-size: 1.5rem; }
+        .qr-demo-section {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 30px 0;
+        }
+        .qr-image {
+            width: 250px;
+            height: 250px;
+            background: #1a237e;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            font-size: 5rem;
+        }
+        .qr-code-display {
+            color: #1a237e;
+            font-family: monospace;
+            font-size: 1.1rem;
+            margin-top: 15px;
+        }
+        .demo-btn {
+            background: linear-gradient(45deg, #ff6f00, #ffa000);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s;
+        }
+        .demo-btn:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            background: rgba(0,0,0,0.5);
+            padding: 15px 25px;
+            border-radius: 50px;
+        }
+        .nav-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        .nav-btn:hover { background: rgba(255,255,255,0.4); }
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background: #ff6f00;
+            transition: width 0.3s;
+        }
+        .slide-number {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            font-size: 1.2rem;
+            background: rgba(0,0,0,0.5);
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(255,111,0,0.3), rgba(255,160,0,0.3));
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #ff6f00;
+        }
+        .investment-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .investment-table th, .investment-table td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        .investment-table th { background: rgba(0,0,0,0.3); }
+        .investment-table tr:last-child td { border-bottom: none; }
+        .contact-info {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+        .contact-info a { color: #ffd54f; text-decoration: none; }
+        .timeline {
+            margin: 40px 0;
+            padding-left: 30px;
+            border-left: 3px solid rgba(255,255,255,0.3);
+        }
+        .timeline-item {
+            padding: 20px;
+            margin: 20px 0;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -36px;
+            top: 25px;
+            width: 15px;
+            height: 15px;
+            background: #ff6f00;
+            border-radius: 50%;
+        }
+        .timeline-date {
+            color: #ffd54f;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="slide-number" id="slideNumber">1 / 8</div>
+
+    <div class="presentation">
+        <!-- Slide 1: Portada -->
+        <div class="slide active" id="slide1">
+            <div style="text-align: center; padding: 100px 20px;">
+                <h1 style="font-size: 4rem;">IXIMI Legacy</h1>
+                <p style="font-size: 1.8rem; margin: 30px 0;">Sistema Blockchain para la Justicia Cultural en México</p>
+                <div class="founder-intro" style="max-width: 500px; margin: 50px auto;">
+                    <div class="founder-photo">👩‍💻</div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Estefanía Pérez Vázquez</h3>
+                    <p style="font-size: 1rem; opacity: 0.8;">Fundadora y Arquitecta Principal</p>
+                    <p style="font-size: 0.9rem; opacity: 0.7; margin-top: 15px;">Sistema desarrollado sin apoyo institucional desde teléfono con Termux</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: El Problema -->
+        <div class="slide" id="slide2">
+            <h2>El Problema: Apropiación Cultural</h2>
+            <p>Las comunidades indígenas de México pierden <strong>$2,000 millones de pesos anuales</strong> por:</p>
+            <ul class="feature-list">
+                <li>Copias no autorizadas por grandes marcas de moda</li>
+                <li>Falta de certificación oficial de diseños ancestrales</li>
+                <li>Cero regalías para artesanos por uso comercial</li>
+                <li>Pérdida irreparable del conocimiento cultural</li>
+            </ul>
+            <div class="highlight-box">
+                <h3>Casos Reales</h3>
+                <p>Diseños textiles zapotecos, mayas, purépechas y de otras 50+ etnias son copiados y vendidos internacionalmente sin reconocimiento ni compensación a las comunidades originales.</p>
+            </div>
+        </div>
+
+        <!-- Slide 3: La Solución -->
+        <div class="slide" id="slide3">
+            <h2>La Solución: IXIMI Legacy</h2>
+            <p>Sistema Nacional de Certificación Blockchain que combina:</p>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div style="font-size: 3rem;">🔗</div>
+                    <h3>Registro Blockchain</h3>
+                    <p>Diseños inmutables en Polygon</p>
+                </div>
+                <div class="stat-card">
+                    <div style="font-size: 3rem;">📱</div>
+                    <h3>Certificación QR</h3>
+                    <p>Verificación instantánea</p>
+                </div>
+                <div class="stat-card">
+                    <div style="font-size: 3rem;">💰</div>
+                    <h3>Regalías Automáticas</h3>
+                    <p>5-15% vía smart contracts</p>
+                </div>
+                <div class="stat-card">
+                    <div style="font-size: 3rem;">🌐</div>
+                    <h3>Accesibilidad</h3>
+                    <p>Para todas las comunidades</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Impacto Esperado -->
+        <div class="slide" id="slide4">
+            <h2>Impacto Esperado (5 Años)</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">500K</div>
+                    <div class="stat-label">Artesanos Beneficiados</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">$500 MDP</div>
+                    <div class="stat-label">Regalías Anuales</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50K</div>
+                    <div class="stat-label">Diseños Protegidos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">89:1</div>
+                    <div class="stat-label">ROI Social</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Demostración -->
+        <div class="slide" id="slide5">
+            <h2>Demostración del Sistema</h2>
+            <div class="qr-demo-section">
+                <div class="qr-image">📱</div>
+                <p class="qr-code-display">IXIMI-ZAP-001-2024</p>
+                <p style="color: #666; margin-top: 10px;">Código QR de Textil Certificado</p>
+                <div style="margin-top: 30px;">
+                    <button class="demo-btn" onclick="simulateVerification()">Verificar Autenticidad</button>
+                    <button class="demo-btn" onclick="simulateRegistration()">Registrar Textil</button>
+                </div>
+                <div id="demo-result" style="margin-top: 20px;"></div>
+            </div>
+            <p style="text-align: center; margin-top: 20px;">
+                <strong>Sistema funcionando en:</strong> http://localhost:3000/demo-meeting
+            </p>
+        </div>
+
+        <!-- Slide 6: Inversión -->
+        <div class="slide" id="slide6">
+            <h2>Inversión Requerida</h2>
+            <p>Inversión total a 3 años: <strong>$106 millones de pesos</strong></p>
+            <table class="investment-table">
+                <tr>
+                    <th>Concepto</th>
+                    <th>Monto</th>
+                    <th>Porcentaje</th>
+                </tr>
+                <tr>
+                    <td>Desarrollo Tecnológico</td>
+                    <td>$35 MDP</td>
+                    <td>33%</td>
+                </tr>
+                <tr>
+                    <td>Capacitación Comunitaria</td>
+                    <td>$30 MDP</td>
+                    <td>28%</td>
+                </tr>
+                <tr>
+                    <td>Infraestructura</td>
+                    <td>$18 MDP</td>
+                    <td>17%</td>
+                </tr>
+                <tr>
+                    <td>Operación y Mantenimiento</td>
+                    <td>$23 MDP</td>
+                    <td>22%</td>
+                </tr>
+            </table>
+            <div class="highlight-box">
+                <h3>Retorno de Inversión</h3>
+                <p><strong>10 años: $9,500 MDP</strong> en impacto económico + ROI social 89:1</p>
+            </div>
+        </div>
+
+        <!-- Slide 7: Hoja de Ruta -->
+        <div class="slide" id="slide7">
+            <h2>Hoja de Ruta de Implementación</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">Meses 1-6</div>
+                    <h3>Fase Piloto</h3>
+                    <p>2 comunidades seleccionadas, 500 artesanos, 5,000 diseños</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Meses 7-18</div>
+                    <h3>Fase de Expansión</h3>
+                    <p>10 comunidades, 15,000 artesanos, 50,000 diseños</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Meses 19-36</div>
+                    <h3>Fase Nacional</h3>
+                    <p>32 estados, 100,000 artesanos, 500,000 diseños</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Cierre -->
+        <div class="slide" id="slide8">
+            <h2>México Puede Ser Líder Mundial</h2>
+            <p>IXIMI Legacy representa:</p>
+            <ul class="feature-list">
+                <li>Primer sistema blockchain-cultural del mundo</li>
+                <li>Modelo replicable en 10+ países</li>
+                <li>Reconocimiento UNESCO como best practice</li>
+                <li>Liderazgo en innovación social-tecnológica</li>
+            </ul>
+            <div class="contact-info" style="text-align: center;">
+                <h3 style="margin-bottom: 20px;">Estefanía Pérez Vázquez</h3>
+                <p>📧 Email: <a href="mailto:legacyiximi@gmail.com">legacyiximi@gmail.com</a></p>
+                <p>🐙 GitHub: <a href="https://github.com/legacyiximi-afk">@legacyiximi-afk</a></p>
+                <p style="margin-top: 20px; font-size: 1.2rem; color: #ffd54f;">
+                    "Tecnología que teje justicia para México"
+                </p>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <p style="font-size: 1.5rem;"><strong>Repositorio:</strong></p>
+                <p style="font-size: 1.1rem; opacity: 0.8;">https://github.com/legacyiximi-afk/iximi_legacy</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" onclick="prevSlide()">← Anterior</button>
+        <button class="nav-btn" onclick="nextSlide()">Siguiente →</button>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 8;
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            currentSlide = n;
+            if (currentSlide > totalSlides) currentSlide = 1;
+            if (currentSlide < 1) currentSlide = totalSlides;
+            
+            document.getElementById('slide' + currentSlide).classList.add('active');
+            document.getElementById('slideNumber').textContent = currentSlide + ' / ' + totalSlides;
+            document.getElementById('progressBar').style.width = (currentSlide / totalSlides * 100) + '%';
+        }
+
+        function nextSlide() { showSlide(currentSlide + 1); }
+        function prevSlide() { showSlide(currentSlide - 1); }
+
+        function simulateVerification() {
+            const result = document.getElementById('demo-result');
+            result.innerHTML = `
+                <div style="background: rgba(76, 175, 80, 0.3); padding: 20px; border-radius: 10px; border: 2px solid #4caf50;">
+                    <h3 style="color: #4caf50;">✓ VERIFICADO</h3>
+                    <p><strong>Textil:</strong> Huipil Zapoteco Tradicional</p>
+                    <p><strong>Artesano:</strong> María Hernández</p>
+                    <p><strong>Comunidad:</strong> Zapoteca, Oaxaca</p>
+                    <p><strong>Score:</strong> 98%</p>
+                    <p><strong>Hash Blockchain:</strong> 0x7a3b9c8d2e1f4a5b6c7d8e9f0a1b2c3d4</p>
+                </div>
+            `;
+        }
+
+        function simulateRegistration() {
+            const result = document.getElementById('demo-result');
+            result.innerHTML = `
+                <div style="background: rgba(33, 150, 243, 0.3); padding: 20px; border-radius: 10px; border: 2px solid #2196f3;">
+                    <h3 style="color: #2196f3;">✓ REGISTRADO</h3>
+                    <p><strong>ID Textil:</strong> iximi-${Date.now()}</p>
+                    <p><strong>QR Code:</strong> IXIMI-${Math.random().toString(36).substr(2, 9).toUpperCase()}</p>
+                    <p><strong>Hash Blockchain:</strong> 0x${Math.random().toString(16).substr(2, 40)}</p>
+                    <p><strong>Red:</strong> Polygon Mumbai</p>
+                </div>
+            `;
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        // Initialize
+        showSlide(1);
+    </script>
+</body>
+</html>

@@ -215,6 +215,10 @@ app.get('/demo-meeting', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/demo-meeting.html'));
 });
 
+app.get('/presentation', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/presentation.html'));
+});
+
 // ============================================================================
 // MANEJO DE ERRORES
 // ============================================================================
@@ -231,7 +235,8 @@ app.use((req, res) => {
       "POST /api/register",
       "GET /",
       "GET /dashboard",
-      "GET /demo-meeting"
+      "GET /demo-meeting",
+      "GET /presentation"
     ]
   });
 });
