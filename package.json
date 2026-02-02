@@ -60,7 +60,7 @@
     "node-cache": "^5.1.2",
     "winston": "^3.8.2",
     "prom-client": "^14.1.0",
-    "swagger-ui-express": "^4.6.2",
+    "swagger-ui-express": "^5.0.1",
     "swagger-jsdoc": "^6.2.8",
     "uuid": "^9.0.0"
   },
