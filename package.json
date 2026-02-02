@@ -11,6 +11,7 @@
     "test:coverage": "jest --coverage",
     "lint": "eslint src/**/*.js",
     "format": "prettier --write src/**/*.js",
+    "build": "tsc",
     "deploy:prod": "node scripts/deploy/production.js",
     "demo:setup": "node scripts/demo/setup.js",
     "generate:docs": "node scripts/docs/generate.js",
