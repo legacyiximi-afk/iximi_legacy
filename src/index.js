@@ -34,7 +34,7 @@ const projectInfo = {
   },
   impact: {
     artisans: 500000,
-    annualRoyalties: 500000000,
+    annualRoyalties:00, 5000000
     socialROI: 89,
     designsProtected: 50000,
     innovation: 'Primer sistema blockchain-cultural del mundo'
