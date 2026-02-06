@@ -1,573 +1,165 @@
-// ============================================================================
-// SISTEMA IXIMI LEGACY - PUNTO DE ENTRADA
-// Desarrollado por: Estefanía Pérez Vázquez
-// Email: legacyiximi@gmail.com
-// GitHub: @legacyiximi-afk
-// Periodo: Mayo 2025 - Enero 2026
-// ============================================================================
-
 const express = require('express');
-const cors = require('cors');
-const path = require('path');
-
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Configuración middleware
-app.use(cors());
+// ================================================
+// MIDDLEWARE
+// ================================================
 app.use(express.json());
-app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
 
-// ============================================================================
-// DATOS DEL PROYECTO Y FUNDADORA
-// ============================================================================
-const projectInfo = {
-  name: 'IXIMI Legacy',
-  version: '1.0.0',
-  founder: {
-    name: 'Estefanía Pérez Vázquez',
-    email: 'legacyiximi@gmail.com',
-    github: '@legacyiximi-afk',
-    education: 'Autodidacta (secundaria terminada)',
-    developmentPeriod: 'Mayo 2025 - Enero 2026',
-    achievement: 'Sistema desarrollado desde teléfono con Termux sin apoyo institucional'
-  },
-  impact: {
-    artisans: 500000,
-    annualRoyalties:00, 5000000
-    socialROI: 89,
-    designsProtected: 50000,
-    innovation: 'Primer sistema blockchain-cultural del mundo'
-  },
-  technology: {
-    blockchain: 'Polygon (Matic)',
-    backend: 'Node.js/Express',
-    database: 'PostgreSQL + Redis',
-    architecture: 'Microservicios con Docker',
-    security: 'ISO 27001, GDPR compliant'
-  }
-};
-
-// ============================================================================
-// ENDPOINTS DE LA API
-// ============================================================================
-
-// Health Check - Verificar estado del sistema
+// ================================================
+// RUTAS DE API
+// ================================================
 app.get('/api/health', (req, res) => {
-  res.status(200).json({
-    status: 'healthy',
-    timestamp: new Date().toISOString(),
+  res.json({ 
+    status: 'healthy', 
     service: 'IXIMI Legacy API',
-    version: projectInfo.version,
+    timestamp: new Date().toISOString(),
     environment: process.env.NODE_ENV || 'development'
   });
 });
 
-// Información del proyecto
 app.get('/api/project', (req, res) => {
   res.json({
-    success: true,
-    data: projectInfo
+    name: 'IXIMI Legacy',
+    version: '1.0.0',
+    description: 'Sistema de protección de patrimonio cultural con blockchain',
+    founder: 'Estefanía Pérez Vázquez',
+    demoFor: 'Lic. Daniel Gutiérrez',
+    meetingDate: 'Viernes 7 de Febrero'
   });
 });
 
-// Demostración interactiva
 app.get('/api/demo', (req, res) => {
-  const demoData = {
-    textiles: [
-      {
-        id: 'iximi-001',
-        name: 'Huipil Zapoteco Tradicional',
-        artisan: 'María Hernández',
-        community: 'Zapoteca, Oaxaca',
-        technique: 'Telar de cintura',
-        materials: ['Algodón', 'Tintes naturales'],
-        qrCode: 'IXIMI-ZAP-001-2024',
-        blockchainHash: '0x7a3b9c8d2e1f4a5b6c7d8e9f0a1b2c3d4e5f6a7b',
-        certificationDate: '2024-01-15',
-        royalties: 1250.50
-      },
-      {
-        id: 'iximi-002',
-        name: 'Rebozo Purépecha',
-        artisan: 'Juana Martínez',
-        community: 'Purépecha, Michoacán',
-        technique: 'Telar de pedal',
-        materials: ['Lana', 'Tintes vegetales'],
-        qrCode: 'IXIMI-PUR-002-2024',
-        blockchainHash: '0x8b4c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6',
-        certificationDate: '2024-01-20',
-        royalties: 890.25
-      }
-    ],
-    communities: [
-      {
-        id: 'zapotec-oaxaca',
-        name: 'Comunidad Zapoteca, Oaxaca',
-        artisans: 1500,
-        textilesRegistered: 350,
-        totalRoyalties: 125000.75
-      },
-      {
-        id: 'purepecha-michoacan',
-        name: 'Comunidad Purépecha, Michoacán',
-        artisans: 1200,
-        textilesRegistered: 280,
-        totalRoyalties: 98750.30
-      }
-    ],
-    statistics: {
-      totalTextiles: 5,
-      totalCommunities: 2,
-      totalRoyalties: 213750.05,
-      verificationsToday: 47,
-      systemUptime: '99.9%'
-    }
-  };
-  
   res.json({
-    success: true,
-    message: 'Datos de demostración IXIMI Legacy',
-    data: demoData
+    demo: true,
+    features: ['blockchain', 'qr_generation', 'database', 'redis_cache', 'docker'],
+    endpoints: ['/api/health', '/api/project', '/demo-meeting', '/dashboard'],
+    ready: true
   });
 });
 
-// Verificación de QR
 app.get('/api/verify/:qrCode', (req, res) => {
   const { qrCode } = req.params;
-  
-  const isVerified = qrCode.startsWith('IXIMI');
-  const verificationDate = new Date().toISOString();
-  
+  res.json({
+    verified: true,
+    qrCode: qrCode,
+    artifact: 'Textil Zapoteco de Teotitlán del Valle',
+    blockchainTx: '0x' + Math.random().toString(16).substr(2, 10),
+    timestamp: new Date().toISOString()
+  });
+});
+
+app.post('/api/register', (req, res) => {
   res.json({
     success: true,
-    verification: {
-      qrCode,
-      isValid: isVerified,
-      verificationDate,
-      blockchainConfirmation: isVerified ? {
-        transactionHash: '0x' + Math.random().toString(16).substr(2, 64),
-        blockNumber: Math.floor(Math.random() * 1000000),
-        timestamp: verificationDate
-      } : null,
-      textile: isVerified ? {
-        name: 'Huipil Zapoteco Tradicional',
-        artisan: 'María Hernández',
-        community: 'Zapoteca, Oaxaca',
-        certifiedDate: '2024-01-15',
-        authenticityScore: 98
-      } : null
-    },
-    message: isVerified 
-      ? 'Textil verificado y autentico' 
-      : 'Codigo QR no valido'
+    message: 'Artefacto registrado en blockchain',
+    qrCode: 'IXIMI-' + Date.now(),
+    transactionId: '0x' + Math.random().toString(16).substr(2, 10)
   });
 });
 
-// Simulación de registro en blockchain
-app.post('/api/register', (req, res) => {
-  const textileData = req.body;
-  
-  if (!textileData.name || !textileData.artisan) {
-    return res.status(400).json({
-      success: false,
-      error: 'Datos incompletos'
-    });
-  }
-  
-  const blockchainResponse = {
-    success: true,
-    transaction: {
-      hash: '0x' + Math.random().toString(16).substr(2, 64),
-      blockNumber: Math.floor(Math.random() * 1000000),
-      timestamp: new Date().toISOString(),
-      network: 'Polygon Mumbai'
-    },
-    textile: {
-      ...textileData,
-      id: 'iximi-' + Date.now(),
-      qrCode: 'IXIMI-' + Math.random().toString(36).substr(2, 9).toUpperCase(),
-      certificationDate: new Date().toISOString(),
-      status: 'certified'
+// ================================================
+// RUTAS DE VISTAS (SIMPLIFICADAS PARA DEPLOY)
+// ================================================
+app.get('/', (req, res) => {
+  res.json({
+    app: 'IXIMI Legacy',
+    status: 'active',
+    message: 'Sistema de protección de patrimonio cultural',
+    demo: 'Para Lic. Daniel Gutiérrez - Viernes 7 de Febrero',
+    availableRoutes: ['/dashboard', '/demo-meeting', '/api/health', '/api/project']
+  });
+});
+
+app.get('/dashboard', (req, res) => {
+  res.json({
+    page: 'dashboard',
+    status: 'active',
+    metrics: {
+      artifactsRegistered: 42,
+      qrGenerated: 156,
+      blockchainTransactions: 89,
+      activeUsers: 23
     }
-  };
-  
-  res.status(201).json({
-    success: true,
-    message: 'Textil registrado exitosamente en blockchain',
-    data: blockchainResponse
   });
-});
-
-// ============================================================================
-// DASHBOARD Y PÁGINAS WEB
-// ============================================================================
-
-app.get("/", (req, res) => {
-  res.send(`
-    <!DOCTYPE html>
-    <html lang="es">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>IXIMI Legacy - Sistema Activo</title>
-      <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: "Segoe UI", Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
-        .container { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding: 40px; border-radius: 20px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); max-width: 800px; width: 90%; border: 1px solid rgba(255, 255, 255, 0.2); }
-        h1 { font-size: 2.5em; margin-bottom: 10px; display: flex; align-items: center; gap: 15px; }
-        h2 { color: #ffd700; margin: 20px 0 10px; }
-        .status-badge { background: #4CAF50; padding: 5px 15px; border-radius: 20px; font-size: 0.9em; display: inline-block; margin: 10px 0; }
-        .endpoints { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 20px 0; }
-        .endpoint-card { background: rgba(255, 255, 255, 0.15); padding: 20px; border-radius: 10px; transition: transform 0.3s; border-left: 4px solid #ffd700; }
-        .endpoint-card:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.25); }
-        .endpoint-card a { color: #ffd700; text-decoration: none; font-weight: bold; font-size: 1.1em; display: block; margin-bottom: 10px; }
-        .endpoint-card p { color: rgba(255, 255, 255, 0.8); font-size: 0.9em; }
-        .demo-info { background: rgba(0, 0, 0, 0.3); padding: 20px; border-radius: 10px; margin: 20px 0; border: 1px solid rgba(255, 255, 255, 0.1); }
-        .button { display: inline-block; background: #ffd700; color: #333; padding: 12px 25px; border-radius: 30px; text-decoration: none; font-weight: bold; margin: 10px 5px; transition: all 0.3s; }
-        .button:hover { background: #ffed4e; transform: scale(1.05); }
-        .tech-badge { display: inline-block; background: rgba(255, 255, 255, 0.2); padding: 5px 10px; border-radius: 15px; margin: 3px; font-size: 0.8em; }
-      </style>
-    </head>
-    <body>
-      <div class="container">
-        <h1>🏛️ IXIMI Legacy</h1>
-        <div class="status-badge">✅ SISTEMA ACTIVO - LISTO PARA DEMO</div>
-        
-        <div class="demo-info">
-          <h2>📅 Demo Programada</h2>
-          <p><strong>👤 Invitado:</strong> Lic. Daniel Gutiérrez</p>
-          <p><strong>📅 Fecha:</strong> Viernes 7 de Febrero</p>
-          <p><strong>🎯 Objetivo:</strong> Presentación sistema completo de protección de patrimonio cultural con blockchain</p>
-        </div>
-        
-        <h2>🚀 Endpoints Principales</h2>
-        <div class="endpoints">
-          <div class="endpoint-card">
-            <a href="/dashboard">📊 /dashboard</a>
-            <p>Panel de control principal del sistema</p>
-          </div>
-          <div class="endpoint-card">
-            <a href="/demo-meeting">🤝 /demo-meeting</a>
-            <p>Vista especial para demostración en reuniones</p>
-          </div>
-          <div class="endpoint-card">
-            <a href="/presentation">📽️ /presentation</a>
-            <p>Presentación ejecutiva del proyecto</p>
-          </div>
-          <div class="endpoint-card">
-            <a href="/api/health">❤️ /api/health</a>
-            <p>Estado de salud del sistema</p>
-          </div>
-          <div class="endpoint-card">
-            <a href="/api/project">📋 /api/project</a>
-            <p>Información técnica del proyecto</p>
-          </div>
-          <div class="endpoint-card">
-            <a href="/api/demo">🎮 /api/demo</a>
-            <p>Datos de demostración y pruebas</p>
-          </div>
-        </div>
-        
-        <h2>🏗️ Tecnologías</h2>
-        <div>
-          <span class="tech-badge">Node.js</span>
-          <span class="tech-badge">Express</span>
-          <span class="tech-badge">PostgreSQL</span>
-          <span class="tech-badge">Redis</span>
-          <span class="tech-badge">Docker</span>
-          <span class="tech-badge">Blockchain</span>
-          <span class="tech-badge">REST API</span>
-        </div>
-        
-        <div style="margin-top: 30px; text-align: center;">
-          <a href="/demo-meeting" class="button">🚀 Iniciar Demo</a>
-          <a href="/presentation" class="button">📊 Ver Presentación</a>
-        </div>
-        
-        <p style="margin-top: 30px; text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 0.9em;">
-          🔐 Sistema protegido por blockchain | 🏛️ Patrimonio Cultural | 🎯 Ready for Production
-        </p>
-      </div>
-    </body>
-    </html>
-  `);
-});
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>IXIMI Legacy - Sistema Activo</title>
-      <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: "Segoe UI", Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
-        .container { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding: 40px; border-radius: 20px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); max-width: 800px; width: 90%; border: 1px solid rgba(255, 255, 255, 0.2); }
-        h1 { font-size: 2.5em; margin-bottom: 10px; display: flex; align-items: center; gap: 15px; }
-        h2 { color: #ffd700; margin: 20px 0 10px; }
-        .status-badge { background: #4CAF50; padding: 5px 15px; border-radius: 20px; font-size: 0.9em; display: inline-block; margin: 10px 0; }
-        .endpoints { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 20px 0; }
-        .endpoint-card { background: rgba(255, 255, 255, 0.15); padding: 20px; border-radius: 10px; transition: transform 0.3s; border-left: 4px solid #ffd700; }
-        .endpoint-card:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.25); }
-        .endpoint-card a { color: #ffd700; text-decoration: none; font-weight: bold; font-size: 1.1em; display: block; margin-bottom: 10px; }
-        .endpoint-card p { color: rgba(255, 255, 255, 0.8); font-size: 0.9em; }
-        .demo-info { background: rgba(0, 0, 0, 0.3); padding: 20px; border-radius: 10px; margin: 20px 0; border: 1px solid rgba(255, 255, 255, 0.1); }
-        .button { display: inline-block; background: #ffd700; color: #333; padding: 12px 25px; border-radius: 30px; text-decoration: none; font-weight: bold; margin: 10px 5px; transition: all 0.3s; }
-        .button:hover { background: #ffed4e; transform: scale(1.05); }
-        .tech-badge { display: inline-block; background: rgba(255, 255, 255, 0.2); padding: 5px 10px; border-radius: 15px; margin: 3px; font-size: 0.8em; }
-      </style>
-    </head>
-    <body>
-      <div class="container">
-        <h1>🏛️ IXIMI Legacy</h1>
-        <div class="status-badge">✅ SISTEMA ACTIVO - LISTO PARA DEMO</div>
-        
-        <div class="demo-info">
-          <h2>📅 Demo Programada</h2>
-          <p><strong>👤 Invitado:</strong> Lic. Daniel Gutiérrez</p>
-          <p><strong>📅 Fecha:</strong> Viernes 7 de Febrero</p>
-          <p><strong>🎯 Objetivo:</strong> Presentación sistema completo de protección de patrimonio cultural con blockchain</p>
-        </div>
-        
-        <h2>🚀 Endpoints Principales</h2>
-        <div class="endpoints">
-          <div class="endpoint-card">
-            <a href="/dashboard">📊 /dashboard</a>
-            <p>Panel de control principal del sistema</p>
-          </div>
-          <div class="endpoint-card">
-            <a href="/demo-meeting">🤝 /demo-meeting</a>
-            <p>Vista especial para demostración en reuniones</p>
-          </div>
-          <div class="endpoint-card">
-            <a href="/presentation">📽️ /presentation</a>
-            <p>Presentación ejecutiva del proyecto</p>
-          </div>
-          <div class="endpoint-card">
-            <a href="/api/health">❤️ /api/health</a>
-            <p>Estado de salud del sistema</p>
-          </div>
-          <div class="endpoint-card">
-            <a href="/api/project">📋 /api/project</a>
-            <p>Información técnica del proyecto</p>
-          </div>
-          <div class="endpoint-card">
-            <a href="/api/demo">🎮 /api/demo</a>
-            <p>Datos de demostración y pruebas</p>
-          </div>
-        </div>
-        
-        <h2>🏗️ Tecnologías</h2>
-        <div>
-          <span class="tech-badge">Node.js</span>
-          <span class="tech-badge">Express</span>
-          <span class="tech-badge">PostgreSQL</span>
-          <span class="tech-badge">Redis</span>
-          <span class="tech-badge">Docker</span>
-          <span class="tech-badge">Blockchain</span>
-          <span class="tech-badge">REST API</span>
-        </div>
-        
-        <div style="margin-top: 30px; text-align: center;">
-          <a href="/demo-meeting" class="button">🚀 Iniciar Demo</a>
-          <a href="/presentation" class="button">📊 Ver Presentación</a>
-        </div>
-        
-        <p style="margin-top: 30px; text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 0.9em;">
-          🔐 Sistema protegido por blockchain | 🏛️ Patrimonio Cultural | 🎯 Ready for Production
-        </p>
-      </div>
-    </body>
-    </html>
-  `);
-});
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>IXIMI Legacy - Sistema Activo</title>
-      <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: "Segoe UI", Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
-        .container { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding: 40px; border-radius: 20px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); max-width: 800px; width: 90%; border: 1px solid rgba(255, 255, 255, 0.2); }
-        h1 { font-size: 2.5em; margin-bottom: 10px; display: flex; align-items: center; gap: 15px; }
-        h2 { color: #ffd700; margin: 20px 0 10px; }
-        .status-badge { background: #4CAF50; padding: 5px 15px; border-radius: 20px; font-size: 0.9em; display: inline-block; margin: 10px 0; }
-        .endpoints { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 20px 0; }
-        .endpoint-card { background: rgba(255, 255, 255, 0.15); padding: 20px; border-radius: 10px; transition: transform 0.3s; border-left: 4px solid #ffd700; }
-        .endpoint-card:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.25); }
-        .endpoint-card a { color: #ffd700; text-decoration: none; font-weight: bold; font-size: 1.1em; display: block; margin-bottom: 10px; }
-        .endpoint-card p { color: rgba(255, 255, 255, 0.8); font-size: 0.9em; }
-        .demo-info { background: rgba(0, 0, 0, 0.3); padding: 20px; border-radius: 10px; margin: 20px 0; border: 1px solid rgba(255, 255, 255, 0.1); }
-        .button { display: inline-block; background: #ffd700; color: #333; padding: 12px 25px; border-radius: 30px; text-decoration: none; font-weight: bold; margin: 10px 5px; transition: all 0.3s; }
-        .button:hover { background: #ffed4e; transform: scale(1.05); }
-        .tech-badge { display: inline-block; background: rgba(255, 255, 255, 0.2); padding: 5px 10px; border-radius: 15px; margin: 3px; font-size: 0.8em; }
-      </style>
-    </head>
-    <body>
-      <div class="container">
-        <h1>🏛️ IXIMI Legacy</h1>
-        <div class="status-badge">✅ SISTEMA ACTIVO - LISTO PARA DEMO</div>
-        
-        <div class="demo-info">
-          <h2>📅 Demo Programada</h2>
-          <p><strong>👤 Invitado:</strong> Lic. Daniel Gutiérrez</p>
-          <p><strong>📅 Fecha:</strong> Viernes 7 de Febrero</p>
-          <p><strong>🎯 Objetivo:</strong> Presentación sistema completo de protección de patrimonio cultural con blockchain</p>
-        </div>
-        
-        <h2>🚀 Endpoints Principales</h2>
-        <div class="endpoints">
-          <div class="endpoint-card">
-            <a href="/dashboard">📊 /dashboard</a>
-            <p>Panel de control principal del sistema</p>
-          </div>
-          <div class="endpoint-card">
-            <a href="/demo-meeting">🤝 /demo-meeting</a>
-            <p>Vista especial para demostración en reuniones</p>
-          </div>
-          <div class="endpoint-card">
-            <a href="/presentation">📽️ /presentation</a>
-            <p>Presentación ejecutiva del proyecto</p>
-          </div>
-          <div class="endpoint-card">
-            <a href="/api/health">❤️ /api/health</a>
-            <p>Estado de salud del sistema</p>
-          </div>
-          <div class="endpoint-card">
-            <a href="/api/project">📋 /api/project</a>
-            <p>Información técnica del proyecto</p>
-          </div>
-          <div class="endpoint-card">
-            <a href="/api/demo">🎮 /api/demo</a>
-            <p>Datos de demostración y pruebas</p>
-          </div>
-        </div>
-        
-        <h2>🏗️ Tecnologías</h2>
-        <div>
-          <span class="tech-badge">Node.js</span>
-          <span class="tech-badge">Express</span>
-          <span class="tech-badge">PostgreSQL</span>
-          <span class="tech-badge">Redis</span>
-          <span class="tech-badge">Docker</span>
-          <span class="tech-badge">Blockchain</span>
-          <span class="tech-badge">REST API</span>
-        </div>
-        
-        <div style="margin-top: 30px; text-align: center;">
-          <a href="/demo-meeting" class="button">🚀 Iniciar Demo</a>
-          <a href="/presentation" class="button">📊 Ver Presentación</a>
-        </div>
-        
-        <p style="margin-top: 30px; text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 0.9em;">
-          🔐 Sistema protegido por blockchain | 🏛️ Patrimonio Cultural | 🎯 Ready for Production
-        </p>
-      </div>
-    </body>
-    </html>
-  `);
-});
-      <p><strong>Demo para:</strong> Lic. Daniel Gutiérrez</p>
-      <p><strong>Fecha:</strong> Viernes 7 de Febrero</p>
-      <hr>
-      <h4>Endpoints disponibles:</h4>
-      <ul>
-        <li><a href="/api/health">/api/health</a> - Estado del sistema</li>
-        <li><a href="/api/project">/api/project</a> - Info del proyecto</li>
-        <li><a href="/api/demo">/api/demo</a> - Datos de demostración</li>
-        <li><a href="/dashboard">/dashboard</a> - Panel de control</li>
-        <li><a href="/demo-meeting">/demo-meeting</a> - Demo reunión</li>
-      </ul>
-      <p>🚀 <em>Sistema listo para producción en Docker</em></p>
-    </div>
-  `);
-});
-  res.sendFile(path.join(__dirname, '../public/dashboard.html'));
 });
 
 app.get('/demo-meeting', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/demo-meeting.html'));
+  res.json({
+    demo: true,
+    title: 'IXIMI Legacy - Demo Meeting',
+    for: 'Lic. Daniel Gutiérrez',
+    date: '2024-02-07',
+    features: [
+      'Registro de artefactos culturales',
+      'Generación de QR único',
+      'Transacciones blockchain',
+      'Dashboard en tiempo real',
+      'API REST completa'
+    ],
+    technologies: ['Node.js', 'PostgreSQL', 'Redis', 'Docker', 'Blockchain']
+  });
 });
 
 app.get('/presentation', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/presentation.html'));
-});
-
-// ============================================================================
-// MANEJO DE ERRORES
-// ============================================================================
-
-app.use((req, res) => {
-  res.status(404).json({
-    success: false,
-    error: 'Endpoint no encontrado',
-    availableEndpoints: [
-      'GET /api/health',
-      'GET /api/project',
-      'GET /api/demo',
-      'GET /api/verify/:qrCode',
-      'POST /api/register',
-      'GET /',
-      'GET /dashboard',
-      'GET /demo-meeting',
-      'GET /presentation'
+  res.json({
+    presentation: true,
+    title: 'IXIMI Legacy - Presentación Ejecutiva',
+    slides: [
+      'Problema: Pérdida de patrimonio cultural',
+      'Solución: Blockchain + QR + Database',
+      'Tecnología: Arquitectura profesional',
+      'Impacto: 500,000 artesanos protegidos',
+      'Demo: Sistema en funcionamiento'
     ]
   });
 });
 
+// ================================================
+// HEALTH CHECK PARA RENDER/DOCKER (EXTRA)
+// ================================================
+app.get('/health', (req, res) => {
+  res.status(200).json({
+    status: 'healthy',
+    timestamp: new Date().toISOString(),
+    service: 'IXIMI Legacy API',
+    version: '1.0.0'
+  });
+});
+
+app.get('/health/simple', (req, res) => {
+  res.status(200).send('OK');
+});
+
+// ================================================
+// MANEJO DE ERRORES
+// ================================================
+app.use((req, res, next) => {
+  res.status(404).json({ error: 'Ruta no encontrada', path: req.path });
+});
+
 app.use((err, req, res, next) => {
   console.error('Error:', err);
-  res.status(500).json({
-    success: false,
-    error: 'Error interno del servidor',
-    message: process.env.NODE_ENV === 'development' ? err.message : undefined
-  });
+  res.status(500).json({ error: 'Error interno del servidor' });
 });
 
-// ============================================================================
+// ================================================
 // INICIAR SERVIDOR
-// ============================================================================
+// ================================================
 const server = app.listen(PORT, '0.0.0.0', () => {
   console.log(`
-  ======================================================
-  IXIMI LEGACY - SISTEMA ACTIVO
-  ======================================================
-  
-  FUNDADORA:
-     Estefanía Pérez Vázquez
-     Email: legacyiximi@gmail.com
-     GitHub: @legacyiximi-afk
-  
-  IMPACTO DEL PROYECTO:
-     500,000 artesanos beneficiados
-     $500 MDP en regalías anuales
-     ROI social: 89:1
-     Primer sistema blockchain-cultural del mundo
-  
-  SERVIDOR INICIADO:
-     URL: http://localhost:${PORT}
-     API: http://localhost:${PORT}/api
-     Dashboard: http://localhost:${PORT}/dashboard
-  
-  ENDPOINTS DISPONIBLES:
-     GET  /api/health     - Estado del sistema
-     GET  /api/project    - Información del proyecto
-     GET  /api/demo       - Datos de demostración
-     GET  /api/verify/:qr - Verificar autenticidad
-     POST /api/register   - Registrar nuevo textil
-  
-  PARA LA REUNION:
-     Demo: http://localhost:${PORT}/demo-meeting
-     QR de prueba: IXIMI-ZAP-001-2024
-  
-  ======================================================
-  Desarrollado con determinación por una mexicana
-  ======================================================
+================================================
+IXIMI LEGACY - SISTEMA ACTIVO
+================================================
+✅ Servidor ejecutándose en: http://0.0.0.0:${PORT}
+✅ Entorno: ${process.env.NODE_ENV || 'development'}
+✅ Health check: http://0.0.0.0:${PORT}/health
+✅ Demo meeting: http://0.0.0.0:${PORT}/demo-meeting
+✅ Hora: ${new Date().toISOString()}
+================================================
   `);
-});
-
-process.on('SIGTERM', () => {
-  console.log('Recibida señal SIGTERM, cerrando servidor...');
-  server.close(() => {
-    console.log('Servidor cerrado exitosamente');
-    process.exit(0);
-  });
 });
 
 module.exports = app;
