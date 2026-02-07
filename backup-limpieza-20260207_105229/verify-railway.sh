@@ -42,3 +42,4 @@ echo "🌐 Para abrir en navegador:"
 echo "   $HEALTH_URL"
 echo "   $DASHBOARD_URL"
 echo "   $DEMO_URL"
+7

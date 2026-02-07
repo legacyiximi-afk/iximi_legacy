@@ -1,4 +1,4 @@
-name: IXIMI Legacy CI/CD
+iname: IXIMI Legacy CI/CD
 
 on:
   push:
