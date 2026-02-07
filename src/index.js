@@ -1,8 +1,9 @@
-/**
+o/**
  * IXIMI Legacy - Sistema de Protección de Patrimonio Cultural con Blockchain
  * 
  * @author Estefanía Pérez Vázquez <legacyiximi@gmail.com>
- * @version 1.0.0
+ * @version 1.0.0-PRODUCTION-READY
+ * @lastUpdate 2026-02-07T09:17:00Z
  * @license MIT
  * @description Sistema empresarial para registro, verificación y protección
  *              de patrimonio cultural oaxaqueño usando tecnología blockchain
