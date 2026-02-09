@@ -1,4 +1,4 @@
-o/**
+/**
  * IXIMI Legacy - Sistema de Protección de Patrimonio Cultural con Blockchain
  * 
  * @author Estefanía Pérez Vázquez <legacyiximi@gmail.com>
