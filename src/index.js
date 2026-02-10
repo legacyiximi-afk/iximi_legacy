@@ -98,27 +98,32 @@ const statistics = {
 };
 
 // ============================================
-// HEALTH CHECKS MEJORADOS
+// HEALTH CHECK ENDPOINTS (Railway requiere /api/health)
 // ============================================
-app.get('/health', (req, res) => {
+
+// Endpoint principal para Railway - CRÍTICO PARA DEPLOY
+app.get('/api/health', (req, res) => {
   const health = {
     status: 'healthy',
     service: 'IXIMI Legacy API',
-    version: '1.0.0',
+    version: '1.0.0-PRODUCTION-READY',
     timestamp: new Date().toISOString(),
-    environment: NODE_ENV,
     uptime: process.uptime(),
-    memory: process.memoryUsage(),
+    environment: NODE_ENV,
     checks: {
-      database: 'connected',      // PostgreSQL
-      redis: 'connected',         // Redis cache
-      blockchain: 'active',       // Ethereum network
-      storage: 'available'        // File storage
+      api: 'operational',
+      server: 'running',
+      memory: Math.round(process.memoryUsage().heapUsed / 1024 / 1024) + 'MB'
     }
   };
-  
-  res.status(200).json(health);
+  res.json(health);
 });
+
+// Endpoint legacy - redirige al nuevo
+app.get('/health', (req, res) => {
+  res.redirect('/api/health');
+});
+
 
 app.get('/health/detailed', (req, res) => {
   res.json({
