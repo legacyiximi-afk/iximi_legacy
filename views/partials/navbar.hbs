@@ -1,0 +1,91 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <i class="fas fa-mayan-calendar me-2"></i>
+            IXIMI <span class="text-warning">Legacy</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link {{#if active.home}}active{{/if}}" href="/">
+                        <i class="fas fa-home me-1"></i> Inicio
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{#if active.dashboard}}active{{/if}}" href="/dashboard">
+                        <i class="fas fa-chart-line me-1"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-tree me-1"></i> Comunidades
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/comunidades/mitla">Mitla</a></li>
+                        <li><a class="dropdown-item" href="/comunidades/atzompa">Atzompa</a></li>
+                        <li><a class="dropdown-item" href="/comunidades/teotitlan">Teotitlán</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/comunidades">Ver todas</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{#if active.artesanos}}active{{/if}}" href="/artesanos">
+                        <i class="fas fa-hands me-1"></i> Artesanos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{#if active.artefactos}}active{{/if}}" href="/artefactos">
+                        <i class="fas fa-gem me-1"></i> Artefactos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{#if active.qr}}active{{/if}}" href="/qr-generator">
+                        <i class="fas fa-qrcode me-1"></i> Generar QR
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{#if active.contacto}}active{{/if}}" href="/contacto">
+                        <i class="fas fa-envelope me-1"></i> Contacto
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<style>
+.navbar {
+    box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    backdrop-filter: blur(10px);
+    background: rgba(33, 37, 41, 0.95) !important;
+}
+.navbar-brand {
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+.nav-link {
+    font-size: 1rem;
+    margin: 0 5px;
+    transition: all 0.3s;
+}
+.nav-link:hover {
+    color: #ffc107 !important;
+    transform: translateY(-2px);
+}
+.dropdown-menu {
+    background: rgba(33, 37, 41, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+.dropdown-item {
+    color: white;
+    transition: all 0.3s;
+}
+.dropdown-item:hover {
+    background: #ffc107;
+    color: black;
+}
+</style>

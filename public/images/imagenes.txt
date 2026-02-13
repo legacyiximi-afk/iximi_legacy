@@ -1,0 +1,21 @@
+📸 INSTRUCCIONES PARA AGREGAR TUS FOTOS REALES:
+
+1. FOTOS DE LA FUNDADORA (en public/images/fundadora/):
+   - fundadora-principal.jpg - Tu foto principal (profesional)
+   - fundadora-trabajando.jpg - Tú desarrollando en Termux
+   - fundadora-comunidad.jpg - Tú con artesanos
+   - fundadora-reconocimiento.jpg - Foto con algún logro
+
+2. FOTOS DE COMUNIDADES (en public/images/comunidades/):
+   - mitla.jpg - Comunidad de Mitla
+   - atzompa.jpg - Comunidad de Atzompa
+   - teotitlan.jpg - Comunidad de Teotitlán
+
+3. FOTOS DE ARTEFACTOS (en public/images/artefactos/):
+   - textil-mitla.jpg - Textil tradicional
+   - barro-atzompa.jpg - Barro negro
+   - tapete-teotitlan.jpg - Tapete ancestral
+
+📱 Para transferir fotos a Termux:
+   - Usa: termux-setup-storage (para acceder a tu almacenamiento)
+   - Copia: cp /sdcard/Download/tu-foto.jpg public/images/fundadora/

@@ -1,0 +1,48 @@
+<div class="container py-4">
+    <h1 class="mb-4" data-aos="fade-right">
+        <i class="fas fa-qrcode me-3 text-primary"></i>Generador QR
+    </h1>
+    
+    <div class="row">
+        <div class="col-md-6" data-aos="fade-right">
+            <div class="card p-4">
+                <form id="qrForm">
+                    <div class="mb-3">
+                        <label class="form-label">Nombre del artefacto</label>
+                        <input type="text" class="form-control" id="artifactName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Comunidad</label>
+                        <select class="form-select" id="community">
+                            <option>Mitla</option>
+                            <option>Atzompa</option>
+                            <option>Teotitlán</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-qrcode me-2"></i>Generar QR
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="col-md-6" data-aos="fade-left">
+            <div class="card p-4 text-center" id="qrPreview" style="display: none;">
+                <h5>Vista previa del QR</h5>
+                <div class="my-4">
+                    <i class="fas fa-qrcode fa-5x text-primary"></i>
+                </div>
+                <p id="qrCodeText"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('qrForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        document.getElementById('qrPreview').style.display = 'block';
+        document.getElementById('qrCodeText').innerHTML = 
+            'QR generado para: ' + document.getElementById('artifactName').value;
+    });
+</script>

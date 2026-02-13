@@ -1,0 +1,320 @@
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4" data-aos="fade-right">
+                <i class="fas fa-chart-line me-3 text-primary"></i>
+                Dashboard de Impacto
+            </h1>
+            
+            <!-- KPIs Principales -->
+            <div class="row g-4 mb-5">
+                <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="kpi-card">
+                        <div class="kpi-icon bg-primary bg-opacity-10">
+                            <i class="fas fa-gem fa-2x text-primary"></i>
+                        </div>
+                        <div class="kpi-content">
+                            <h3 class="kpi-value">42</h3>
+                            <p class="kpi-label">Artefactos Protegidos</p>
+                            <span class="kpi-trend text-success">
+                                <i class="fas fa-arrow-up"></i> +12% este mes
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="kpi-card">
+                        <div class="kpi-icon bg-success bg-opacity-10">
+                            <i class="fas fa-tree fa-2x text-success"></i>
+                        </div>
+                        <div class="kpi-content">
+                            <h3 class="kpi-value">8</h3>
+                            <p class="kpi-label">Comunidades Activas</p>
+                            <span class="kpi-trend text-success">
+                                <i class="fas fa-arrow-up"></i> +3 nuevas
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="kpi-card">
+                        <div class="kpi-icon bg-warning bg-opacity-10">
+                            <i class="fas fa-hands fa-2x text-warning"></i>
+                        </div>
+                        <div class="kpi-content">
+                            <h3 class="kpi-value">156</h3>
+                            <p class="kpi-label">Artesanos Registrados</p>
+                            <span class="kpi-trend text-success">
+                                <i class="fas fa-arrow-up"></i> +23%
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="kpi-card">
+                        <div class="kpi-icon bg-info bg-opacity-10">
+                            <i class="fas fa-link fa-2x text-info"></i>
+                        </div>
+                        <div class="kpi-content">
+                            <h3 class="kpi-value">89</h3>
+                            <p class="kpi-label">Transacciones Blockchain</p>
+                            <span class="kpi-trend text-success">
+                                <i class="fas fa-arrow-up"></i> +8
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Gráficos de Impacto -->
+            <div class="row g-4 mb-5">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h4><i class="fas fa-chart-pie me-2 text-primary"></i>Artefactos por Comunidad</h4>
+                            <span class="badge bg-primary">Actualizado hoy</span>
+                        </div>
+                        <div class="chart-body">
+                            <canvas id="communitiesChart" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h4><i class="fas fa-chart-line me-2 text-success"></i>Crecimiento Mensual</h4>
+                            <span class="badge bg-success">+45% anual</span>
+                        </div>
+                        <div class="chart-body">
+                            <canvas id="growthChart" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tabla de Inversión -->
+            <div class="row g-4">
+                <div class="col-12" data-aos="fade-up">
+                    <div class="investment-card">
+                        <div class="investment-header">
+                            <h4><i class="fas fa-hand-holding-usd me-2 text-warning"></i>Proyección de Inversión</h4>
+                            <div class="investment-tabs">
+                                <button class="btn btn-sm btn-outline-primary active">1 año</button>
+                                <button class="btn btn-sm btn-outline-primary">3 años</button>
+                                <button class="btn btn-sm btn-outline-primary">5 años</button>
+                            </div>
+                        </div>
+                        
+                        <div class="row mt-4">
+                            <div class="col-md-4">
+                                <div class="roi-card text-center">
+                                    <div class="roi-value">89:1</div>
+                                    <div class="roi-label">ROI Social</div>
+                                    <small class="text-muted">Por cada peso invertido</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="roi-card text-center">
+                                    <div class="roi-value">$2,000M</div>
+                                    <div class="roi-label">Mercado Anual</div>
+                                    <small class="text-muted">Pérdidas por apropiación</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="roi-card text-center">
+                                    <div class="roi-value">500K</div>
+                                    <div class="roi-label">Artesanos Meta</div>
+                                    <small class="text-muted">Para 2030</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-4">
+                            <a href="/contacto" class="btn btn-warning btn-lg">
+                                <i class="fas fa-handshake me-2"></i>Solicitar Propuesta de Inversión
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Gráfico de comunidades
+    const ctx1 = document.getElementById('communitiesChart').getContext('2d');
+    new Chart(ctx1, {
+        type: 'doughnut',
+        data: {
+            labels: ['Mitla (15)', 'Atzompa (22)', 'Teotitlán (5)', 'Próximas (8)'],
+            datasets: [{
+                data: [15, 22, 5, 8],
+                backgroundColor: ['#8B5CF6', '#10B981', '#F59E0B', '#94A3B8'],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'bottom' }
+            }
+        }
+    });
+
+    // Gráfico de crecimiento
+    const ctx2 = document.getElementById('growthChart').getContext('2d');
+    new Chart(ctx2, {
+        type: 'line',
+        data: {
+            labels: ['Sep', 'Oct', 'Nov', 'Dic', 'Ene', 'Feb'],
+            datasets: [{
+                label: 'Artefactos Registrados',
+                data: [12, 19, 25, 33, 38, 42],
+                borderColor: '#10B981',
+                backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                tension: 0.4,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
+    });
+</script>
+
+<style>
+.kpi-card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: all 0.3s;
+    height: 100%;
+}
+
+.kpi-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+}
+
+.kpi-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.kpi-content {
+    flex: 1;
+}
+
+.kpi-value {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #1F2937;
+    margin-bottom: 5px;
+    line-height: 1;
+}
+
+.kpi-label {
+    color: #6B7280;
+    margin-bottom: 5px;
+    font-size: 0.95rem;
+}
+
+.kpi-trend {
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.chart-card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+    height: 100%;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.chart-header h4 {
+    margin: 0;
+    color: #1F2937;
+}
+
+.investment-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+}
+
+.investment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.investment-tabs {
+    display: flex;
+    gap: 10px;
+}
+
+.roi-card {
+    padding: 25px;
+    background: #F9FAFB;
+    border-radius: 15px;
+}
+
+.roi-value {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #8B5CF6;
+    margin-bottom: 5px;
+}
+
+.roi-label {
+    color: #1F2937;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+@media (max-width: 768px) {
+    .kpi-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .investment-header {
+        flex-direction: column;
+    }
+    
+    .roi-value {
+        font-size: 1.8rem;
+    }
+}
+</style>
