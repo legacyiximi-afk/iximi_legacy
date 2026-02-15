@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: iximi-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: iximi_legacy
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend API
+  backend:
+    build:
+      context: ./apps/backend
+      dockerfile: Dockerfile
+    container_name: iximi-backend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: development
+      PORT: 3001
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/iximi_legacy?schema=public
+      JWT_SECRET: dev-secret-key-change-in-production
+      CORS_ORIGIN: http://localhost:3000
+    ports:
+      - '3001:3001'
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./apps/backend/src:/app/src
+      - ./apps/backend/prisma:/app/prisma
+    command: npm run dev
+
+  # Frontend (opcional, para desarrollo)
+  # frontend:
+  #   build:
+  #     context: ./apps/frontend
+  #     dockerfile: Dockerfile
+  #   container_name: iximi-frontend
+  #   restart: unless-stopped
+  #   ports:
+  #     - '3000:3000'
+  #   depends_on:
+  #     - backend
+  #   volumes:
+  #     - ./apps/frontend/src:/app/src
+  #   command: npm run dev
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  default:
+    name: iximi-network

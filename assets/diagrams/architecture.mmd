@@ -1,0 +1,26 @@
+graph TD
+    subgraph Frontend
+        A[React App] --> B[Zustand Store]
+        B --> C[API Services]
+    end
+
+    subgraph Backend
+        C --> D[Express API]
+        D --> E[Controllers]
+        E --> F[Use Cases]
+        F --> G[Domain Entities]
+        F --> H[Repositories]
+        H --> I[Prisma ORM]
+    end
+
+    subgraph Infrastructure
+        I --> J[(PostgreSQL)]
+        F --> K[Blockchain SDK]
+        K --> L[Smart Contracts]
+        L --> M[(Blockchain Network)]
+    end
+
+    style A fill:#8B5CF6,color:#fff
+    style D fill:#10B981,color:#fff
+    style J fill:#F59E0B,color:#fff
+    style M fill:#1F2937,color:#fff

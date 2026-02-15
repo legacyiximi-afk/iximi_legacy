@@ -1,0 +1,21 @@
+# CODEOWNERS file for IXIMI Legacy
+# Estos usuarios serán solicitados automáticamente para revisión cuando alguien abra un PR que modifique código en su área.
+
+# Default owners for everything in the repo
+* @legacyiximi-afk
+
+# Backend code
+/apps/backend/ @legacyiximi-afk
+
+# Frontend code
+/apps/frontend/ @legacyiximi-afk
+
+# Documentation
+/docs/ @legacyiximi-afk
+*.md @legacyiximi-afk
+
+# CI/CD workflows
+/.github/ @legacyiximi-afk
+
+# Blockchain SDK
+/packages/blockchain-sdk/ @legacyiximi-afk

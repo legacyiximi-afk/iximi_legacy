@@ -1,0 +1,99 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  artifacts Artifact[]
+
+  @@map("users")
+}
+
+model Community {
+  id          String   @id @default(uuid())
+  name        String
+  nameNative  String   @map("name_native")
+  language    String
+  region      String
+  description String   @db.Text
+  latitude    Float?
+  longitude   Float?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  artifacts Artifact[]
+
+  @@map("communities")
+}
+
+model Artifact {
+  id                String   @id @default(uuid())
+  title             String
+  titleNative       String?  @map("title_native")
+  description       String   @db.Text
+  descriptionNative String?  @map("description_native") @db.Text
+  category          String
+  imageUrl          String?  @map("image_url")
+  imageHash         String?  @map("image_hash")
+  blockchainTxHash  String?  @map("blockchain_tx_hash")
+  blockchainStatus  BlockchainStatus @default(PENDING) @map("blockchain_status")
+  verified          Boolean  @default(false)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  communityId String    @map("community_id")
+  community   Community @relation(fields: [communityId], references: [id])
+
+  createdById String @map("created_by_id")
+  createdBy   User   @relation(fields: [createdById], references: [id])
+
+  narratives Narrative[]
+
+  @@index([communityId])
+  @@index([createdById])
+  @@map("artifacts")
+}
+
+model Narrative {
+  id         String   @id @default(uuid())
+  content    String   @db.Text
+  language   String
+  speakerName String? @map("speaker_name")
+  recordedAt DateTime? @map("recorded_at")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  artifactId String   @map("artifact_id")
+  artifact   Artifact @relation(fields: [artifactId], references: [id], onDelete: Cascade)
+
+  @@index([artifactId])
+  @@map("narratives")
+}
+
+enum Role {
+  USER
+  ADMIN
+  COMMUNITY_MANAGER
+}
+
+enum BlockchainStatus {
+  PENDING
+  PROCESSING
+  CONFIRMED
+  FAILED
+}
