@@ -116,6 +116,9 @@ exports.apiGenerateQR = (req, res) => {
     // Generar código QR único
     const qrCode = `${type}-${community}-${Date.now()}`.toUpperCase();
     
+    // Generar URL de verificación profesional
+    const verificationUrl = `https://skillful-freedom-production-1872.up.railway.app/verify/${qrCode}`;
+    
     // Si registra en blockchain, generar hash
     const txHash = registerBlockchain ? 
         '0x' + Math.random().toString(16).substring(2, 42) : null;
@@ -124,7 +127,8 @@ exports.apiGenerateQR = (req, res) => {
         success: true,
         data: {
             qrCode,
-            qrImage: `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${qrCode}`,
+            verificationUrl,
+            qrImage: `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${verificationUrl}`,
             blockchain: txHash ? {
                 registered: true,
                 transaction: txHash,

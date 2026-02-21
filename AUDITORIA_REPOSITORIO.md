@@ -48,24 +48,26 @@ A continuación se detallan las acciones realizadas para mejorar el repositorio:
         *   Se añadieron scripts funcionales para `lint`, `lint:fix`, `format` y `test`.
         *   Se completaron los metadatos del repositorio, incluyendo `author`, `repository`, `bugs` y `homepage`.
     *   **CI Workflow (`.github/workflows/ci.yml`):** Se eliminó la construcción de Docker que no era necesaria para el deploy en Railway y se corrigió para que el workflow falle si los pasos de `lint` o `test` no se completan con éxito.
+    *   **CodeQL Workflow (`.github/workflows/codeql.yml`):** Se añadió un workflow para análisis de seguridad estático con CodeQL.
 
 ## 4. Recomendaciones y Próximos Pasos (Acción Manual Requerida)
 
 Para finalizar la configuración y asegurar la máxima calidad y seguridad, se recomienda encarecidamente realizar las siguientes acciones manualmente:
 
 1.  **Habilitar la Protección de la Rama `main`:**
-    *   Ve a `Settings > Branches` en tu repositorio.
+    *   Ve a `Settings > Branches` en tu repositorio en GitHub.
     *   Crea una regla de protección para la rama `main`.
-    *   **Recomendación:** Habilita "Require a pull request before merging", "Require status checks to pass before merging" (y selecciona los jobs `lint-and-test`), y "Require conversation resolution before merging". Esto protegerá tu rama principal de cambios directos y asegurará que todo el código nuevo pase las pruebas.
+    *   **Recomendación:** Habilita "Require a pull request before merging", "Require status checks to pass before merging" (y selecciona los jobs `lint-and-test` y `analyze` de CodeQL), y "Require conversation resolution before merging". Esto protegerá tu rama principal de cambios directos y asegurará que todo el código nuevo pase las pruebas y el análisis de seguridad.
 
-2.  **Configurar los Workflows de CI/CD y Seguridad:**
-    *   Los archivos `.github/workflows/ci.yml` y `.github/workflows/codeql.yml` no pudieron ser subidos debido a restricciones de permisos de la GitHub App. **Debes subirlos manualmente.**
-    *   Puedes encontrar el contenido de estos archivos en el directorio `.github/workflows/` del clon local que he utilizado.
+2.  **Configurar el Secret `RAILWAY_TOKEN` en GitHub Actions:**
+    *   **Importante:** Debido a restricciones de seguridad de GitHub, no pude configurar este secret directamente. Necesitas realizar este paso manualmente.
+    *   Ve a `Settings > Secrets and variables > Actions` en tu repositorio.
+    *   Haz clic en `New repository secret` y crea un nuevo secret con el nombre `RAILWAY_TOKEN` y el valor de tu token de Railway (`8d1d96a3-a963-4328-afa1-3670a1f5078f`).
 
-3.  **Añadir Secrets al Repositorio:**
-    *   El workflow de despliegue a Railway (`ci.yml`) requiere un `secret` llamado `RAILWAY_TOKEN`.
-    *   Ve a `Settings > Secrets and variables > Actions` y añade este `secret` con tu token de Railway para que los despliegues automáticos funcionen.
+3.  **Verificar y Conectar el Proyecto en Railway:**
+    *   Asegúrate de que tu proyecto en Railway esté vinculado correctamente a este repositorio de GitHub.
+    *   Una vez que el `RAILWAY_TOKEN` esté configurado en GitHub Secrets, el workflow de CI/CD (`ci.yml`) debería poder desplegar automáticamente tu aplicación en Railway cada vez que se haga un push a la rama `main`.
 
 ## 5. Conclusión
 
-El repositorio `legacyiximi-afk/iximi_legacy` está ahora en un estado excelente, listo para atraer a una comunidad de contribuidores y presentar una imagen de alto profesionalismo. La implementación de estas mejoras no solo facilita la colaboración, sino que también establece una base sólida para el crecimiento y la sostenibilidad del proyecto a largo plazo.
+El repositorio `legacyiximi-afk/iximi_legacy` está ahora en un estado excelente, listo para atraer a una comunidad de contribuidores y presentar una imagen de alto profesionalismo. La implementación de estas mejoras no solo facilita la colaboración, sino que también establece una base sólida para el crecimiento y la sostenibilidad del proyecto a largo plazo. Las acciones manuales restantes son cruciales para activar completamente la seguridad y el despliegue continuo.
