@@ -1,10 +1,70 @@
-<div class="container py-4">
-    <h1 class="mb-4">Artefactos</h1>
-    <div class="alert alert-info">
-        <i class="fas fa-info-circle me-2"></i>
-        Página en construcción. Próximamente estará disponible.
+<div class="container py-5">
+    <div class="row mb-5">
+        <div class="col-lg-8">
+            <h1 class="display-5 fw-bold text-primary mb-2">Galería de Artefactos</h1>
+            <p class="lead text-muted">Explora los textiles indígenas certificados y verifica su autenticidad mediante blockchain.</p>
+        </div>
+        <div class="col-lg-4 text-lg-end d-flex align-items-center justify-content-lg-end">
+            <a href="/qr-generator" class="btn btn-primary btn-lg shadow-sm">
+                <i class="fas fa-plus-circle me-2"></i>Certificar Nuevo
+            </a>
+        </div>
     </div>
-    <a href="/" class="btn btn-primary mt-3">
-        <i class="fas fa-arrow-left me-2"></i>Volver al inicio
-    </a>
+
+    <div class="row g-4">
+        {{#each artifacts}}
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 border-0 shadow-sm hover-shadow transition-all">
+                <div class="card-header bg-white border-0 pt-4 px-4 d-flex justify-content-between align-items-start">
+                    <div>
+                        <span class="badge bg-{{statusColor}} mb-2">{{status}}</span>
+                        <h5 class="card-title fw-bold mb-0">{{name}}</h5>
+                    </div>
+                    <div class="text-primary">
+                        <i class="fas fa-certificate fa-2x"></i>
+                    </div>
+                </div>
+                <div class="card-body px-4">
+                    <div class="mb-3 text-center py-4 bg-light rounded-3">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{qrCode}}" 
+                             alt="QR {{qrCode}}" 
+                             class="img-fluid rounded shadow-sm bg-white p-2">
+                        <p class="small text-muted mt-3 mb-0">ID: <code class="text-primary">{{qrCode}}</code></p>
+                    </div>
+                    <div class="d-flex flex-column gap-2">
+                        <div class="d-flex justify-content-between border-bottom pb-2">
+                            <span class="text-muted small">Comunidad</span>
+                            <span class="fw-semibold small">{{community}}</span>
+                        </div>
+                        <div class="d-flex justify-content-between border-bottom pb-2">
+                            <span class="text-muted small">Artesano</span>
+                            <span class="fw-semibold small">{{artisan}}</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span class="text-muted small">Fecha Reg.</span>
+                            <span class="fw-semibold small">{{date}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer bg-white border-0 pb-4 px-4">
+                    <a href="https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data={{qrCode}}" 
+                       target="_blank" 
+                       class="btn btn-outline-primary w-100 btn-sm">
+                        <i class="fas fa-download me-2"></i>Descargar QR HD
+                    </a>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
 </div>
+
+<style>
+.hover-shadow:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.1) !important;
+}
+.transition-all {
+    transition: all 0.3s ease;
+}
+</style>
