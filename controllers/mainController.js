@@ -144,7 +144,7 @@ exports.verifyCertificate = (req, res) => {
     const qrCode = req.params.qrCode;
     
     // Buscar el artefacto en los datos (usando el objeto 'data' definido al inicio del controlador)
-    const artifact = data.artifacts.find(a => a.qrCode === qrCode);
+    const artifact = data.artifacts.find(a => a.qrCode.toUpperCase() === qrCode.toUpperCase());
     
     if (!artifact) {
         return res.status(404).render('pages/404', {
