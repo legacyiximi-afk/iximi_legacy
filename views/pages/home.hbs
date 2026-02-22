@@ -1,343 +1,145 @@
-<div class="hero-section">
-    <div class="container">
-        <div class="row min-vh-100 align-items-center">
-            <div class="col-lg-8 mx-auto text-center" data-aos="fade-up">
-                <div class="hero-badge mb-4">
-                    <span class="badge bg-warning text-dark px-4 py-2">
-                        <i class="fas fa-crown me-2"></i>PROYECTO GANADOR - INNOVACIÓN SOCIAL 2026
-                    </span>
+<!-- 
+  IXIMI Legacy - Página Principal (Home)
+  Diseño de alto impacto enfocado en justicia textil y tecnología blockchain.
+-->
+
+<!-- Hero Section: El corazón de la plataforma -->
+<section class="hero-section py-5 text-white position-relative overflow-hidden" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); min-height: 85vh; display: flex; align-items: center;">
+    <!-- Elementos decorativos de fondo -->
+    <div class="position-absolute top-0 start-0 w-100 h-100 opacity-25" style="background-image: url('https://www.transparenttextures.com/patterns/az-subtle.png');"></div>
+    
+    <div class="container position-relative z-index-1">
+        <div class="row align-items-center">
+            <div class="col-lg-7 mb-5 mb-lg-0">
+                <div class="badge bg-warning text-dark px-3 py-2 rounded-pill mb-3 shadow-sm animate__animated animate__fadeInDown">
+                    <i class="fas fa-crown me-2"></i>PROYECTO GANADOR - INNOVACIÓN SOCIAL 2026
                 </div>
-                
-                <h1 class="display-2 fw-bold mb-4 text-white">
-                    <i class="fas fa-mayan-calendar me-3 text-warning"></i>
-                    IXIMI Legacy
-                </h1>
-                
-                <p class="lead mb-5 text-white-50 fs-3">
-                    "Tecnología que teje justicia para México"
+                <h1 class="display-3 fw-bold mb-4 animate__animated animate__fadeInLeft">Tejiendo <span class="text-primary">Justicia Digital</span> para México</h1>
+                <p class="lead mb-5 opacity-75 animate__animated animate__fadeInLeft animate__delay-1s fs-4">
+                    "Tecnología que teje justicia para México". Protegemos el patrimonio cultural mediante el registro inmutable en blockchain.
                 </p>
-                
-                <div class="stats-highlight mb-5">
-                    <div class="row g-4">
-                        <div class="col-md-3 col-6">
-                            <div class="stat-circle">
-                                <div class="number">42</div>
-                                <div class="label">Artefactos</div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-6">
-                            <div class="stat-circle">
-                                <div class="number">8</div>
-                                <div class="label">Comunidades</div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-6">
-                            <div class="stat-circle">
-                                <div class="number">156</div>
-                                <div class="label">Artesanos</div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-6">
-                            <div class="stat-circle">
-                                <div class="number">89</div>
-                                <div class="label">Transacciones</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="cta-buttons">
-                    <a href="#historia" class="btn btn-outline-light btn-lg me-3">
-                        <i class="fas fa-play-circle me-2"></i>Conoce mi Historia
+                <div class="d-flex flex-wrap gap-3 animate__animated animate__fadeInUp animate__delay-1s">
+                    <a href="/artefactos" class="btn btn-primary btn-lg px-5 py-3 rounded-pill shadow">
+                        <i class="fas fa-images me-2"></i>Explorar Galería
                     </a>
-                    <a href="/dashboard" class="btn btn-warning btn-lg">
+                    <a href="/dashboard" class="btn btn-outline-light btn-lg px-5 py-3 rounded-pill">
                         <i class="fas fa-chart-line me-2"></i>Ver Impacto
                     </a>
                 </div>
             </div>
+            <div class="col-lg-5 animate__animated animate__zoomIn animate__delay-1s text-center">
+                <div class="hero-image-wrapper p-4 bg-white bg-opacity-10 rounded-4 backdrop-blur shadow-lg border border-white border-opacity-10">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://skillful-freedom-production-1872.up.railway.app/&color=ffffff&bgcolor=transparent" alt="QR Demo" class="img-fluid rounded-3 mb-3" style="max-width: 250px;">
+                    <h5 class="fw-bold mb-0 text-white">Escanea para Verificar</h5>
+                    <p class="small opacity-75 text-white">Certificación Inmediata</p>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+</section>
+
+<!-- Sección de Métricas: El Impacto Real -->
+<section class="py-5 bg-white shadow-sm position-relative" style="margin-top: -50px; z-index: 2;">
+    <div class="container">
+        <div class="row g-4 text-center">
+            <div class="col-6 col-md-3">
+                <div class="p-4 rounded-4 bg-white shadow-sm border hover-up transition-all">
+                    <h2 class="display-5 fw-bold text-primary mb-1">{{metrics.artifacts}}</h2>
+                    <p class="text-muted small fw-bold text-uppercase mb-0">Artefactos</p>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="p-4 rounded-4 bg-white shadow-sm border hover-up transition-all">
+                    <h2 class="display-5 fw-bold text-primary mb-1">{{metrics.communities}}</h2>
+                    <p class="text-muted small fw-bold text-uppercase mb-0">Comunidades</p>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="p-4 rounded-4 bg-white shadow-sm border hover-up transition-all">
+                    <h2 class="display-5 fw-bold text-primary mb-1">{{metrics.artisans}}</h2>
+                    <p class="text-muted small fw-bold text-uppercase mb-0">Artesanos</p>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="p-4 rounded-4 bg-white shadow-sm border hover-up transition-all">
+                    <h2 class="display-5 fw-bold text-primary mb-1">{{metrics.transactions}}</h2>
+                    <p class="text-muted small fw-bold text-uppercase mb-0">Blockchain</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- SECCIÓN DE LA FUNDADORA - HISTORIA DE SUPERACIÓN -->
-<section id="historia" class="founder-section py-5">
-    <div class="container">
+<section id="historia" class="py-5 bg-light overflow-hidden">
+    <div class="container py-5">
         <div class="row align-items-center g-5">
-            <div class="col-lg-6" data-aos="fade-right">
-                <div class="founder-image-wrapper">
-                    <div class="founder-image">
-                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&h=600&fit=crop&crop=face" 
-                             alt="Estefanía Pérez - Fundadora" 
-                             class="img-fluid rounded-4 shadow">
-                    </div>
-                    <div class="floating-badge">
-                        <i class="fas fa-heart text-danger"></i>
-                        <span>Hecho con pasión</span>
+            <div class="col-lg-6">
+                <div class="position-relative">
+                    <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&h=600&fit=crop&crop=face" 
+                         alt="Estefanía Pérez - Fundadora" 
+                         class="img-fluid rounded-4 shadow-lg border border-5 border-white">
+                    <div class="position-absolute bottom-0 end-0 bg-warning text-dark p-3 rounded-4 shadow mb-n3 me-n3 animate__animated animate__bounceIn animate__delay-2s">
+                        <i class="fas fa-heart text-danger me-2"></i>
+                        <span class="fw-bold">Hecho con pasión</span>
                     </div>
                 </div>
             </div>
             
-            <div class="col-lg-6" data-aos="fade-left">
-                <div class="founder-story">
-                    <h2 class="display-5 fw-bold mb-4">
-                        <span class="text-primary">Una historia</span><br>
-                        <span class="text-warning">de determinación</span>
-                    </h2>
-                    
-                    <div class="story-card mb-4">
-                        <div class="quote-icon">
-                            <i class="fas fa-quote-left fa-3x text-primary opacity-25"></i>
-                        </div>
-                        <p class="lead fst-italic mb-4">
-                            "Cuando la gente me dijo que era imposible desarrollar 
-                            blockchain desde un teléfono, yo ya estaba escribiendo 
-                            las primeras líneas de código..."
-                        </p>
-                    </div>
-                    
-                    <div class="journey-timeline">
-                        <div class="timeline-item">
-                            <div class="timeline-icon bg-warning">
-                                <i class="fas fa-mobile-alt"></i>
-                            </div>
-                            <div class="timeline-content">
-                                <h5>Mayo 2025</h5>
-                                <p class="mb-0">Comencé a aprender Node.js en Termux, sin computadora</p>
-                            </div>
-                        </div>
-                        
-                        <div class="timeline-item">
-                            <div class="timeline-icon bg-primary">
-                                <i class="fas fa-code"></i>
-                            </div>
-                            <div class="timeline-content">
-                                <h5>Agosto 2025</h5>
-                                <p class="mb-0">Primeras líneas de código de IXIMI Legacy</p>
-                            </div>
-                        </div>
-                        
-                        <div class="timeline-item">
-                            <div class="timeline-icon bg-success">
-                                <i class="fas fa-hand-holding-heart"></i>
-                            </div>
-                            <div class="timeline-content">
-                                <h5>Diciembre 2025</h5>
-                                <p class="mb-0">Primera comunidad protegida: Mitla</p>
-                            </div>
-                        </div>
-                        
-                        <div class="timeline-item">
-                            <div class="timeline-icon bg-info">
-                                <i class="fas fa-rocket"></i>
-                            </div>
-                            <div class="timeline-content">
-                                <h5>Febrero 2026</h5>
-                                <p class="mb-0">8 comunidades, 42 artefactos, ¡esto apenas comienza!</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- SECCIÓN DE LIMITACIONES Y SUPERACIÓN -->
-<section class="challenges-section py-5 bg-light">
-    <div class="container">
-        <h2 class="text-center display-6 fw-bold mb-5" data-aos="fade-up">
-            "No tenía los recursos, pero tenía la convicción"
-        </h2>
-        
-        <div class="row g-4">
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                <div class="challenge-card">
-                    <div class="challenge-icon">
-                        <i class="fas fa-mobile-alt fa-3x text-warning"></i>
-                    </div>
-                    <h4>Desarrollado en un teléfono</h4>
-                    <p class="text-muted">Todo el código fue escrito en Termux, sin computadora. Cada línea es prueba de que la voluntad supera cualquier limitación.</p>
-                    <div class="challenge-stats">
-                        <span class="badge bg-primary">+500 horas</span>
-                        <span class="badge bg-success">10,000+ líneas</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                <div class="challenge-card">
-                    <div class="challenge-icon">
-                        <i class="fas fa-wifi-slash fa-3x text-danger"></i>
-                    </div>
-                    <h4>Sin internet estable</h4>
-                    <p class="text-muted">Aprendí a optimizar cada consulta, cada transacción blockchain, para funcionar en condiciones adversas.</p>
-                    <div class="challenge-stats">
-                        <span class="badge bg-info">Modo offline</span>
-                        <span class="badge bg-success">Optimizado</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
-                <div class="challenge-card">
-                    <div class="challenge-icon">
-                        <i class="fas fa-gem fa-3x text-primary"></i>
-                    </div>
-                    <h4>Sin financiamiento</h4>
-                    <p class="text-muted">Cero presupuesto, cero inversores. Solo pasión, conocimiento y el apoyo de las comunidades que creyeron en el proyecto.</p>
-                    <div class="challenge-stats">
-                        <span class="badge bg-warning">ROI social: 89:1</span>
-                        <span class="badge bg-success">Impacto real</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="text-center mt-5" data-aos="fade-up">
-            <div class="testimonial-quote">
-                <i class="fas fa-quote-right fa-2x text-primary opacity-50"></i>
-                <p class="lead fw-bold mt-3">
-                    "Si puedes imaginarlo, puedes programarlo. Incluso desde un teléfono."
+            <div class="col-lg-6">
+                <h2 class="display-5 fw-bold mb-4">
+                    <span class="text-primary">Una historia</span> de<br>
+                    <span class="text-warning">determinación pura</span>
+                </h2>
+                
+                <p class="lead fst-italic mb-4 border-start border-primary border-4 ps-4 py-2 bg-white rounded-end shadow-sm">
+                    "Cuando la gente me dijo que era imposible desarrollar blockchain desde un teléfono, yo ya estaba escribiendo las primeras líneas de código..."
                 </p>
-                <p class="text-muted">— Estefanía Pérez, Fundadora</p>
+
+                <div class="mb-4">
+                    <p class="text-muted">IXIMI Legacy no nació en una oficina de Silicon Valley, sino de la necesidad de justicia para los artesanos de México. Todo el código fue escrito en un teléfono móvil, superando barreras tecnológicas y económicas.</p>
+                </div>
+                
+                <a href="/fundadora" class="btn btn-outline-primary rounded-pill px-4">Conoce la historia completa</a>
             </div>
         </div>
     </div>
 </section>
 
-<!-- SECCIÓN DE COMUNIDADES CON FOTOS -->
-<section class="communities-showcase py-5">
-    <div class="container">
-        <h2 class="text-center display-6 fw-bold mb-5" data-aos="fade-up">
-            <i class="fas fa-tree me-3 text-primary"></i>
-            Comunidades que ya protege IXIMI Legacy
-        </h2>
-        
-        <div class="row g-4">
-            <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="100">
-                <div class="community-card">
-                    <div class="community-image">
-                        <img src="https://images.unsplash.com/photo-1582221367022-c2d2e5f8d4b2?w=400&h=300&fit=crop" 
-                             alt="Mitla" class="img-fluid">
-                        <div class="community-overlay">
-                            <span class="badge bg-warning text-dark">15 artefactos</span>
-                        </div>
+<!-- Sección de Tecnología: Cómo Funciona -->
+<section class="py-5 bg-white">
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-lg-6 order-lg-2 mb-5 mb-lg-0">
+                <img src="https://images.unsplash.com/photo-1582142306909-195724d33ffc?auto=format&fit=crop&w=800&q=80" alt="Artesanía y Tecnología" class="img-fluid rounded-4 shadow-lg">
+            </div>
+            <div class="col-lg-6 order-lg-1 pe-lg-5">
+                <h2 class="display-6 fw-bold mb-4">Tecnología al servicio del arte</h2>
+                <div class="d-flex mb-4 hover-up transition-all p-3 rounded-3">
+                    <div class="me-4 text-primary bg-light p-3 rounded-circle h-100">
+                        <i class="fas fa-fingerprint fa-2x"></i>
                     </div>
-                    <div class="community-info p-4">
-                        <h4>San Pablo Villa de Mitla</h4>
-                        <p class="text-muted small">Textiles tradicionales zapotecas</p>
-                        <div class="progress mb-2">
-                            <div class="progress-bar bg-success" style="width: 75%">75% protegido</div>
-                        </div>
+                    <div>
+                        <h5 class="fw-bold mb-1">Identidad Digital Única</h5>
+                        <p class="text-muted small mb-0">Cada pieza recibe un identificador criptográfico basado en sus características y origen.</p>
                     </div>
                 </div>
-            </div>
-            
-            <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
-                <div class="community-card">
-                    <div class="community-image">
-                        <img src="https://images.unsplash.com/photo-1615452673343-54b3b2ebc3e8?w=400&h=300&fit=crop" 
-                             alt="Atzompa" class="img-fluid">
-                        <div class="community-overlay">
-                            <span class="badge bg-warning text-dark">22 artefactos</span>
-                        </div>
+                <div class="d-flex mb-4 hover-up transition-all p-3 rounded-3">
+                    <div class="me-4 text-primary bg-light p-3 rounded-circle h-100">
+                        <i class="fas fa-cube fa-2x"></i>
                     </div>
-                    <div class="community-info p-4">
-                        <h4>Santa María Atzompa</h4>
-                        <p class="text-muted small">Barro verde y cerámica</p>
-                        <div class="progress mb-2">
-                            <div class="progress-bar bg-success" style="width: 88%">88% protegido</div>
-                        </div>
+                    <div>
+                        <h5 class="fw-bold mb-1">Registro en Blockchain</h5>
+                        <p class="text-muted small mb-0">Usamos la red Polygon para asegurar que el registro sea inmutable, público y verificable por siempre.</p>
                     </div>
                 </div>
-            </div>
-            
-            <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
-                <div class="community-card">
-                    <div class="community-image">
-                        <img src="https://images.unsplash.com/photo-1545175707-4b7c6b8b5f5e?w=400&h=300&fit=crop" 
-                             alt="Teotitlán" class="img-fluid">
-                        <div class="community-overlay">
-                            <span class="badge bg-warning text-dark">5 artefactos</span>
-                        </div>
+                <div class="d-flex hover-up transition-all p-3 rounded-3">
+                    <div class="me-4 text-primary bg-light p-3 rounded-circle h-100">
+                        <i class="fas fa-mobile-alt fa-2x"></i>
                     </div>
-                    <div class="community-info p-4">
-                        <h4>Teotitlán del Valle</h4>
-                        <p class="text-muted small">Tapetes ancestrales</p>
-                        <div class="progress mb-2">
-                            <div class="progress-bar bg-warning" style="width: 45%">45% protegido</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="text-center mt-5">
-            <a href="/comunidades" class="btn btn-outline-primary btn-lg">
-                <i class="fas fa-arrow-right me-2"></i>Ver todas las comunidades
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- SECCIÓN DE IMPACTO PARA FINANCIADORES -->
-<section class="impact-section py-5 bg-primary text-white">
-    <div class="container">
-        <h2 class="text-center display-6 fw-bold mb-5" data-aos="fade-up">
-            <i class="fas fa-chart-pie me-3"></i>
-            Impacto Real para Inversionistas
-        </h2>
-        
-        <div class="row g-4">
-            <div class="col-md-4" data-aos="fade-up">
-                <div class="impact-card text-center">
-                    <div class="impact-icon mb-3">
-                        <i class="fas fa-chart-line fa-4x text-warning"></i>
-                    </div>
-                    <h3 class="h2 fw-bold">$500 MDP</h3>
-                    <p class="mb-2">En regalías para artesanos</p>
-                    <small class="text-white-50">Proyectado a 5 años</small>
-                </div>
-            </div>
-            
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                <div class="impact-card text-center">
-                    <div class="impact-icon mb-3">
-                        <i class="fas fa-users fa-4x text-warning"></i>
-                    </div>
-                    <h3 class="h2 fw-bold">500,000</h3>
-                    <p class="mb-2">Artesanos protegidos</p>
-                    <small class="text-white-50">Meta para 2030</small>
-                </div>
-            </div>
-            
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                <div class="impact-card text-center">
-                    <div class="impact-icon mb-3">
-                        <i class="fas fa-hand-holding-heart fa-4x text-warning"></i>
-                    </div>
-                    <h3 class="h2 fw-bold">89:1</h3>
-                    <p class="mb-2">ROI Social</p>
-                    <small class="text-white-50">Por cada peso invertido</small>
-                </div>
-            </div>
-        </div>
-        
-        <div class="row mt-5 justify-content-center">
-            <div class="col-lg-8">
-                <div class="investor-message p-4 bg-white text-dark rounded-4">
-                    <h4 class="mb-3">¿Por qué invertir en IXIMI Legacy?</h4>
-                    <ul class="list-unstyled">
-                        <li class="mb-3"><i class="fas fa-check-circle text-success me-2"></i> <strong>Mercado:</strong> $2,000 MDP anuales perdidos por apropiación cultural</li>
-                        <li class="mb-3"><i class="fas fa-check-circle text-success me-2"></i> <strong>Tecnología:</strong> Blockchain + QR + IA, todo funcionando</li>
-                        <li class="mb-3"><i class="fas fa-check-circle text-success me-2"></i> <strong>Equipo:</strong> Fundadora que desarrolló todo desde cero</li>
-                        <li class="mb-3"><i class="fas fa-check-circle text-success me-2"></i> <strong>Impacto social:</strong> Comunidades reales ya protegidas</li>
-                    </ul>
-                    
-                    <div class="text-center mt-4">
-                        <a href="/contacto" class="btn btn-primary btn-lg">
-                            <i class="fas fa-handshake me-2"></i>Hablemos de inversión
-                        </a>
+                    <div>
+                        <h5 class="fw-bold mb-1">Verificación por QR</h5>
+                        <p class="text-muted small mb-0">Cualquier comprador puede escanear la etiqueta y ver el certificado de autenticidad en segundos.</p>
                     </div>
                 </div>
             </div>
@@ -345,281 +147,14 @@
     </div>
 </section>
 
+<!-- Estilos personalizados -->
 <style>
-/* Hero Section */
-.hero-section {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-    position: relative;
-    overflow: hidden;
-    min-height: 100vh;
-}
-
-.hero-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><path d="M10,50 Q30,30 50,50 T90,50" stroke="white" fill="none" stroke-width="2"/><circle cx="30" cy="30" r="3" fill="white"/><circle cx="70" cy="70" r="3" fill="white"/></svg>');
-    background-size: 100px 100px;
-    animation: patternMove 20s linear infinite;
-}
-
-@keyframes patternMove {
-    from { background-position: 0 0; }
-    to { background-position: 100px 100px; }
-}
-
-.stat-circle {
-    width: 120px;
-    height: 120px;
-    margin: 0 auto;
-    background: rgba(255,255,255,0.1);
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid rgba(255,215,0,0.5);
-    transition: all 0.3s;
-}
-
-.stat-circle:hover {
-    transform: scale(1.1);
-    border-color: #FFD700;
-    background: rgba(255,215,0,0.1);
-}
-
-.stat-circle .number {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #FFD700;
-    line-height: 1;
-}
-
-.stat-circle .label {
-    font-size: 0.9rem;
-    color: white;
-}
-
-/* Founder Section */
-.founder-image-wrapper {
-    position: relative;
-    padding: 20px;
-}
-
-.founder-image {
-    border-radius: 30px;
-    overflow: hidden;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.3);
-    border: 5px solid white;
-    transition: all 0.3s;
-}
-
-.founder-image:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 40px 80px rgba(0,0,0,0.4);
-}
-
-.floating-badge {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    background: white;
-    padding: 15px 25px;
-    border-radius: 50px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0px); }
-}
-
-/* Timeline */
-.journey-timeline {
-    position: relative;
-    padding-left: 30px;
-}
-
-.timeline-item {
-    position: relative;
-    margin-bottom: 30px;
-    display: flex;
-    align-items: flex-start;
-}
-
-.timeline-icon {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.2rem;
-    margin-right: 20px;
-    flex-shrink: 0;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-.timeline-content {
-    flex: 1;
-    background: white;
-    padding: 15px 20px;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-}
-
-.timeline-content h5 {
-    color: #8B5CF6;
-    margin-bottom: 5px;
-    font-weight: 600;
-}
-
-.timeline-content p {
-    color: #6B7280;
-    font-size: 0.95rem;
-}
-
-/* Challenge Cards */
-.challenge-card {
-    background: white;
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-    height: 100%;
-    transition: all 0.3s;
-    text-align: center;
-}
-
-.challenge-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-}
-
-.challenge-icon {
-    margin-bottom: 20px;
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
-}
-
-.challenge-stats {
-    margin-top: 20px;
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-}
-
-.challenge-stats .badge {
-    padding: 8px 15px;
-    font-size: 0.9rem;
-}
-
-/* Community Cards */
-.community-card {
-    background: white;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-    transition: all 0.3s;
-    height: 100%;
-}
-
-.community-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-}
-
-.community-image {
-    position: relative;
-    height: 250px;
-    overflow: hidden;
-}
-
-.community-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s;
-}
-
-.community-card:hover .community-image img {
-    transform: scale(1.1);
-}
-
-.community-overlay {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-}
-
-.community-overlay .badge {
-    font-size: 1rem;
-    padding: 10px 20px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-.community-info {
-    padding: 20px;
-}
-
-.community-info h4 {
-    color: #1F2937;
-    margin-bottom: 10px;
-    font-size: 1.3rem;
-}
-
-/* Impact Section */
-.impact-card {
-    padding: 30px;
-    background: rgba(255,255,255,0.1);
-    border-radius: 20px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.2);
-    transition: all 0.3s;
-    height: 100%;
-}
-
-.impact-card:hover {
-    transform: translateY(-10px);
-    background: rgba(255,255,255,0.2);
-}
-
-.investor-message {
-    border-left: 5px solid #FFD700;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .stat-circle {
-        width: 90px;
-        height: 90px;
-    }
-    
-    .stat-circle .number {
-        font-size: 1.8rem;
-    }
-    
-    .founder-image-wrapper {
-        margin-bottom: 30px;
-    }
-    
-    .timeline-item {
-        flex-direction: column;
-    }
-    
-    .timeline-icon {
-        margin-bottom: 10px;
-    }
-}
+    .hero-section { background-attachment: fixed; }
+    .backdrop-blur { backdrop-filter: blur(10px); }
+    .rounded-4 { border-radius: 1.5rem !important; }
+    .hover-up:hover { transform: translateY(-10px); }
+    .transition-all { transition: all 0.3s ease; }
+    .z-index-1 { z-index: 1; }
+    .mb-n3 { margin-bottom: -1rem !important; }
+    .me-n3 { margin-right: -1rem !important; }
 </style>
