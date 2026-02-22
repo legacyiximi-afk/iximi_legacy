@@ -138,3 +138,28 @@ exports.apiGenerateQR = (req, res) => {
         }
     });
 };
+
+// Lógica de verificación de certificado
+exports.verifyCertificate = (req, res) => {
+    const qrCode = req.params.qrCode;
+    
+    // Buscar el artefacto en los datos (usando el objeto 'data' definido al inicio del controlador)
+    const artifact = data.artifacts.find(a => a.qrCode === qrCode);
+    
+    if (!artifact) {
+        return res.status(404).render('pages/404', {
+            title: 'Certificado no encontrado'
+        });
+    }
+    
+    res.render('pages/verify-certificate', {
+        title: `Verificar: ${artifact.name} | IXIMI Legacy`,
+        active: { verify: true },
+        qrCode: artifact.qrCode,
+        name: artifact.name,
+        artisan: artifact.artisan,
+        community: artifact.community,
+        date: artifact.date,
+        timestamp: new Date().toLocaleString('es-MX')
+    });
+};
