@@ -50,7 +50,7 @@ class DeployScript {
       });
       this.success(`${description} completado`);
       return true;
-    } catch (error) {
+    } catch (_error) {
       this.error(`${description} falló: ${error.message}`);
       return false;
     }
@@ -63,7 +63,7 @@ class DeployScript {
       execSync('docker-compose --version', { stdio: 'pipe' });
       this.success('Docker y Docker Compose están instalados');
       return true;
-    } catch (error) {
+    } catch (_error) {
       this.error('Docker o Docker Compose no están instalados');
       return false;
     }
@@ -150,7 +150,7 @@ class DeployScript {
         stdio: 'pipe' 
       });
       this.success('Contenedores anteriores detenido');
-    } catch (error) {
+    } catch (_error) {
       this.warning('No había contenedores anteriores ejecutándose');
     }
   }
@@ -187,7 +187,7 @@ class DeployScript {
           this.success('Servidor principal está saludable');
           return true;
         }
-      } catch (error) {
+      } catch (_error) {
         // Servicio aún no disponible
       }
       

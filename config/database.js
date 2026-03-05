@@ -123,4 +123,18 @@ const database = {
   }
 };
 
+
+// Obtener todas las comunidades
+async function getAllCommunities() {
+  const query = 'SELECT DISTINCT community FROM artifacts WHERE community IS NOT NULL';
+  try {
+    const result = await pool.query(query);
+    return result.rows;
+  } catch (error) {
+    console.error('Error obteniendo comunidades:', error);
+    throw error;
+  }
+}
+database.getAllCommunities = getAllCommunities;
+
 module.exports = database;
