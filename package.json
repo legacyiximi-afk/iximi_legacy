@@ -38,7 +38,7 @@
     "winston": "^3.19.0"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.3.4",
+    "@eslint/eslintrc": "^3.3.5",
     "@eslint/js": "^10.0.1",
     "@eslint/migrate-config": "^2.0.2",
     "@types/bcryptjs": "^3.0.0",
